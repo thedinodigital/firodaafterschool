@@ -57,15 +57,16 @@ const Funding = () => {
               </h2>
               
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Firoda Afterschool is proud to be a registered provider under the 
-                National Childcare Scheme. This means eligible families can receive 
-                government subsidies to help reduce the cost of quality childcare.
+                Firoda Afterschool is registered with the National Childcare Scheme (NCS), 
+                helping families access quality childcare with financial support where 
+                eligible. This government-backed scheme can significantly reduce the 
+                cost of afterschool care for qualifying families.
               </p>
               
               <p className="text-muted-foreground text-lg leading-relaxed">
-                The NCS is designed to make childcare more affordable and accessible 
-                for families across Ireland. Whether you're working, studying, or 
-                looking for work, you may be entitled to support.
+                Whether you're working, studying, or looking for work, you may be entitled 
+                to NCS support. The scheme offers both universal subsidies and income-assessed 
+                subsidies to make childcare more accessible for families across Ireland.
               </p>
               
               <ul className="space-y-4">

@@ -7,23 +7,23 @@ import heroImage from "@/assets/hero-children.jpg";
 const features = [
   {
     icon: BookOpen,
-    title: "Homework Support",
-    description: "Structured time for completing homework with guidance from caring staff.",
+    title: "Supervised Homework Support",
+    description: "Dedicated time and space for children to complete homework with patient, caring guidance from our qualified staff.",
   },
   {
     icon: Heart,
-    title: "Nurturing Environment",
-    description: "A safe, welcoming space where children feel valued and supported.",
+    title: "Creative & Educational Activities",
+    description: "Engaging activities including arts, crafts, games, and learning experiences that spark creativity and curiosity.",
   },
   {
     icon: Users,
     title: "Social Development",
-    description: "Building friendships and developing essential social skills through play.",
+    description: "Guided opportunities for positive peer interaction, teamwork, and building lasting friendships in a supportive setting.",
   },
   {
     icon: Clock,
-    title: "Flexible Hours",
-    description: "Convenient after-school hours from 1:40 PM to 5:40 PM, Monday to Friday.",
+    title: "Nutritious Snacks & Routines",
+    description: "Healthy snacks and structured daily routines that help children feel secure and energised.",
   },
 ];
 
@@ -50,14 +50,15 @@ const Index = () => {
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-tight text-balance">
-                A Safe, Supportive Place for Children{" "}
-                <span className="text-primary">After School</span>
+                A Safe, Supportive Afterschool Environment for{" "}
+                <span className="text-primary">School-Age Children</span>
               </h1>
               
               <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Located at Firoda National School in Castlecomer, we provide a nurturing, 
-                structured environment where children learn, play, and grow. Supported by 
-                the National Childcare Scheme.
+                Firoda Afterschool provides a structured and nurturing space where children 
+                can unwind after the school day, complete homework, enjoy creative activities, 
+                and build positive social connections. Based at Firoda National School in 
+                Castlecomer and supported by the National Childcare Scheme.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
@@ -105,11 +106,11 @@ const Index = () => {
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
-              What We Offer
+              What Children Experience at Firoda Afterschool
             </h2>
             <p className="text-muted-foreground text-lg">
-              A comprehensive after-school program designed to support your child's 
-              development and give you peace of mind.
+              A thoughtfully designed program that supports your child's wellbeing, 
+              learning, and social development in a calm, caring environment.
             </p>
           </div>
           

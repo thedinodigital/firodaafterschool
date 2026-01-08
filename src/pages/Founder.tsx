@@ -33,7 +33,7 @@ const Founder = () => {
               Meet the Founder
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              The heart and soul behind Firoda Afterschool
+              Dedicated to providing quality childcare in the Castlecomer community
             </p>
           </div>
         </div>
@@ -89,21 +89,22 @@ const Founder = () => {
               
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Marie Kennedy brings years of experience in childcare and education 
-                  to Firoda Afterschool. Her passion for child development and family 
-                  support has been the driving force behind creating a nurturing 
-                  after-school environment in Castlecomer.
+                  Marie Kennedy brings extensive experience in childcare and education 
+                  to Firoda Afterschool. With a deep commitment to child development 
+                  and family wellbeing, Marie has created a nurturing after-school 
+                  environment that has become a trusted resource for families in 
+                  Castlecomer and the surrounding area.
                 </p>
                 <p>
-                  As a trusted figure in the local community, Marie understands the 
-                  needs of working families and the importance of quality childcare. 
-                  She is committed to providing a safe, structured, and enriching 
-                  experience for every child in her care.
+                  As a respected member of the local community, Marie understands the 
+                  needs of working families and recognises the importance of reliable, 
+                  quality childcare. She is dedicated to ensuring every child in her 
+                  care feels safe, valued, and supported.
                 </p>
                 <p>
-                  Under Marie's leadership, Firoda Afterschool has become a valued 
-                  resource for families in the area, known for its warm, welcoming 
-                  atmosphere and dedication to each child's wellbeing.
+                  Under Marie's thoughtful leadership, Firoda Afterschool has earned a 
+                  reputation for its warm, inclusive atmosphere and genuine dedication 
+                  to each child's academic, social, and emotional development.
                 </p>
               </div>
             </div>

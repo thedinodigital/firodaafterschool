@@ -82,37 +82,10 @@ const Location = () => {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center pb-4 border-b border-border">
                     <div>
-                      <p className="font-heading font-semibold text-foreground">Monday</p>
+                      <p className="font-heading font-semibold text-foreground">Monday – Friday</p>
+                      <p className="text-sm text-muted-foreground">During school term</p>
                     </div>
-                    <p className="text-primary font-semibold">1:40 PM – 5:40 PM</p>
-                  </div>
-                  
-                  <div className="flex justify-between items-center pb-4 border-b border-border">
-                    <div>
-                      <p className="font-heading font-semibold text-foreground">Tuesday</p>
-                    </div>
-                    <p className="text-primary font-semibold">1:40 PM – 5:40 PM</p>
-                  </div>
-                  
-                  <div className="flex justify-between items-center pb-4 border-b border-border">
-                    <div>
-                      <p className="font-heading font-semibold text-foreground">Wednesday</p>
-                    </div>
-                    <p className="text-primary font-semibold">1:40 PM – 5:40 PM</p>
-                  </div>
-                  
-                  <div className="flex justify-between items-center pb-4 border-b border-border">
-                    <div>
-                      <p className="font-heading font-semibold text-foreground">Thursday</p>
-                    </div>
-                    <p className="text-primary font-semibold">1:40 PM – 5:40 PM</p>
-                  </div>
-                  
-                  <div className="flex justify-between items-center pb-4 border-b border-border">
-                    <div>
-                      <p className="font-heading font-semibold text-foreground">Friday</p>
-                    </div>
-                    <p className="text-primary font-semibold">1:40 PM – 5:40 PM</p>
+                    <p className="text-primary font-semibold text-lg">1:40 PM – 5:40 PM</p>
                   </div>
                   
                   <div className="flex justify-between items-center">

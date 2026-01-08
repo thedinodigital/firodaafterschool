@@ -54,9 +54,9 @@ const About = () => {
               About Our Program
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              At Firoda Afterschool, we provide a safe, structured, and engaging environment 
-              where children can relax, socialise, complete homework, and enjoy enriching 
-              activities after the school day ends.
+              At Firoda Afterschool, our mission is to provide a safe, structured, and inclusive 
+              environment where children feel supported, respected, and encouraged to grow 
+              academically, socially, and emotionally after school hours.
             </p>
           </div>
         </div>
@@ -73,21 +73,21 @@ const About = () => {
               </div>
               
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground">
-                Creating a Nurturing Space for Every Child
+                A Nurturing Space Where Children Thrive
               </h2>
               
               <p className="text-muted-foreground text-lg leading-relaxed">
                 We believe every child deserves a supportive environment where they can 
-                thrive after the school day. Our program bridges the gap between school 
-                and home, providing a structured yet relaxed setting where children can 
-                unwind, learn, and grow.
+                thrive beyond the school day. Our program provides a gentle bridge between 
+                school and home — a structured yet relaxed setting where children can 
+                unwind, complete homework, and enjoy enriching activities.
               </p>
               
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Located within Firoda National School, our afterschool program offers 
-                convenience for families while maintaining a familiar, comfortable 
-                environment for children. We work closely with parents to ensure each 
-                child's individual needs are met.
+                Located within Firoda National School, we offer the convenience of on-site 
+                care in a familiar, comfortable environment. We maintain open communication 
+                with parents and work collaboratively to ensure each child's individual 
+                needs are understood and supported.
               </p>
               
               <ul className="grid sm:grid-cols-2 gap-3 pt-4">
