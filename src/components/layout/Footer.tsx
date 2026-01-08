@@ -18,7 +18,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-footer-muted text-sm leading-relaxed mb-4">
-              A safe, supportive place for children after school. We provide quality childcare in a nurturing environment where children learn, play, and grow.
+              A structured, nurturing afterschool environment where children can complete homework, enjoy creative activities, and build positive social connections.
             </p>
             <div className="flex items-center gap-2 text-sm">
               <Shield className="w-4 h-4 text-secondary" />

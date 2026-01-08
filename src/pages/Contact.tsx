@@ -104,11 +104,11 @@ const Contact = () => {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-6">
-              Get In Touch
+              Contact Us
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              We'd love to hear from you. Contact us to learn more about our 
-              after-school program or to enrol your child.
+              We're here to answer your questions about our afterschool program. 
+              Reach out to learn more or discuss how we can support your family.
             </p>
           </div>
         </div>
@@ -313,7 +313,7 @@ const Contact = () => {
                 </form>
                 
                 <p className="text-sm text-muted-foreground text-center mt-6">
-                  We respond within 24 hours. For urgent matters, please call us directly.
+                  We aim to respond within 24 hours during weekdays. For time-sensitive enquiries, please call us directly.
                 </p>
               </div>
             </div>
