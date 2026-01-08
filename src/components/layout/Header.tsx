@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.png";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -20,14 +21,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-card/95 backdrop-blur-md border-b border-border">
       <nav className="container flex items-center justify-between py-4">
-        <Link to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center shadow-soft">
-            <span className="text-primary-foreground font-heading font-bold text-lg">F</span>
-          </div>
-          <div className="hidden sm:block">
-            <span className="font-heading font-bold text-lg text-foreground">Firoda</span>
-            <span className="font-heading font-medium text-lg text-primary"> Afterschool</span>
-          </div>
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="Firoda Afterschool" className="h-12 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
