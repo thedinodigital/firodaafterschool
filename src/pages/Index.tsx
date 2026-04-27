@@ -25,6 +25,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SchoolhouseSVG, AfterSchoolSceneSVG } from "@/components/illustrations/SchoolhouseSVG";
+import { HurleysIcon } from "@/components/icons/HurleysIcon";
 import { newsItems, upcomingEvents, facilities, homeFaqs, lifeAtSchool, achievements } from "@/data/content";
 
 const achievementIcon = (key: string) => {
@@ -34,13 +35,13 @@ const achievementIcon = (key: string) => {
 };
 
 const lifeIcon = (key: string) => {
-  if (key === "active") return Trophy;
+  if (key === "active") return HurleysIcon; // hurleys & sliotar from the crest
   if (key === "music") return Music2;
   return Users;
 };
 
 const facilityIcon = (key: string) => {
-  if (key === "field" || key === "hurl") return Trophy;
+  if (key === "field" || key === "hurl") return HurleysIcon; // GAA / hurling pitches
   if (key === "indoor") return Building2;
   if (key === "classroom") return GraduationCap;
   if (key === "yard") return HandHeart;
@@ -257,8 +258,13 @@ const Index = () => {
             <div className="lg:col-span-9 grid sm:grid-cols-3 gap-6">
               {achievements.map((a) => {
                 const Icon = achievementIcon(a.icon);
+                // Active = teal-rich, Amber = gold (kept), Creative = teal-soft (was terracotta)
                 const ring =
-                  a.icon === "active" ? "bg-primary" : a.icon === "amber" ? "bg-gold" : "bg-accent";
+                  a.icon === "active"
+                    ? "bg-primary-rich"
+                    : a.icon === "amber"
+                    ? "bg-gold"
+                    : "bg-primary-soft";
                 return (
                   <div key={a.name} className="flex items-start gap-4">
                     <div className={`w-11 h-11 rounded-full ${ring} flex items-center justify-center flex-shrink-0`}>
