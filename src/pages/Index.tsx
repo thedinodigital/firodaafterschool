@@ -64,11 +64,11 @@ const eventBadge = (iso: string) => {
 const NewsThumb = ({ kind }: { kind?: string }) => {
   // Brand-coloured illustrative thumbnails — no stock photos
   const palette = {
-    books: { bg: "#ebe2d0", a: "#2d4a3a", b: "#c67b5c" },
-    field: { bg: "#1e3428", a: "#d4a853", b: "#e8c4b0" },
-    music: { bg: "#e8c4b0", a: "#1e3428", b: "#2d4a3a" },
-    community: { bg: "#ebe2d0", a: "#1e3428", b: "#c67b5c" },
-    art: { bg: "#f4efe4", a: "#c67b5c", b: "#2d4a3a" },
+    books: { bg: "#ebe2d0", a: "#13494b", b: "#c89545" },
+    field: { bg: "#0c3134", a: "#c89545", b: "#e0c896" },
+    music: { bg: "#e0c896", a: "#0c3134", b: "#13494b" },
+    community: { bg: "#ebe2d0", a: "#13494b", b: "#c89545" },
+    art: { bg: "#f4efe4", a: "#c89545", b: "#13494b" },
   } as const;
   const k = (kind || "books") as keyof typeof palette;
   const p = palette[k];

@@ -59,13 +59,13 @@
     --footer-muted: 41 15% 65%;
 
     --sidebar-background: 41 36% 92%;
-    --sidebar-foreground: 150 22% 13%;
-    --sidebar-primary: 145 24% 23%;
+    --sidebar-foreground: 180 33% 9%;
+    --sidebar-primary: 182 58% 18%;
     --sidebar-primary-foreground: 41 36% 95%;
     --sidebar-accent: 39 35% 86%;
-    --sidebar-accent-foreground: 150 22% 13%;
+    --sidebar-accent-foreground: 180 33% 9%;
     --sidebar-border: 39 22% 76%;
-    --sidebar-ring: 145 24% 23%;
+    --sidebar-ring: 35 53% 53%;
   }
 
   .dark {
