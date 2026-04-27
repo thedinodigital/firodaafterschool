@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
+import { JsonLd, SITE_URL } from "@/components/JsonLd";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
