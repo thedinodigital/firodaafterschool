@@ -6,7 +6,6 @@ import {
   Pencil,
   Music2,
   Users,
-  Trophy,
   ChevronRight,
   Trees,
   Shield,
