@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
+import { JsonLd, SITE_URL } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
 import { newsItems } from "@/data/content";
 import { ArrowLeft } from "lucide-react";
@@ -11,9 +12,34 @@ const NewsPost = () => {
   const { slug } = useParams();
   const post = newsItems.find(n => n.slug === slug);
   if (!post) return <Navigate to="/news" replace />;
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: post.title,
+    description: post.excerpt,
+    articleBody: post.body,
+    datePublished: post.date,
+    dateModified: post.date,
+    articleSection: post.category,
+    inLanguage: "en-IE",
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/news/${post.slug}` },
+    author: {
+      "@type": "EducationalOrganization",
+      name: "Holy Cross National School",
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "EducationalOrganization",
+      name: "Holy Cross National School",
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` },
+    },
+  };
+
   return (
     <Layout>
       <Seo title={`${post.title} — Holy Cross N.S., Firoda`} description={post.excerpt} />
+      <JsonLd id="ld-article" data={articleJsonLd} />
       <PageHero
         eyebrow={`${post.category} · ${formatDate(post.date)}`}
         title={post.title}

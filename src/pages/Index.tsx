@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
+import { JsonLd, SITE_URL } from "@/components/JsonLd";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -125,11 +126,14 @@ const Index = () => {
 
   const schoolJsonLd = {
     "@context": "https://schema.org",
-    "@type": "School",
+    "@type": ["EducationalOrganization", "School"],
     name: "Holy Cross National School",
+    alternateName: "Holy Cross N.S., Firoda",
     description:
-      "A small rural Catholic primary school serving the community between Castlecomer and Ballinakill since 1962.",
+      "A small rural Catholic primary school serving the community between Castlecomer and Ballinakill, Co. Kilkenny, since 1962.",
     foundingDate: "1962",
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: "Firoda",
@@ -139,8 +143,37 @@ const Index = () => {
       addressCountry: "IE",
     },
     telephone: "+353-56-444-1384",
-    url: typeof window !== "undefined" ? window.location.origin : "",
+    email: "office@holycrossfiroda.ie",
+    sameAs: ["https://twitter.com/SchoolFiroda"],
+    areaServed: { "@type": "Place", name: "North Co. Kilkenny, Ireland" },
   };
+
+  const eventsJsonLd = upcomingEvents.map((e) => ({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: e.title,
+    description: e.description,
+    startDate: e.date,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: "Holy Cross National School",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Firoda",
+        addressLocality: "Castlecomer",
+        addressRegion: "Co. Kilkenny",
+        postalCode: "R95 E22N",
+        addressCountry: "IE",
+      },
+    },
+    organizer: {
+      "@type": "EducationalOrganization",
+      name: "Holy Cross National School",
+      url: SITE_URL,
+    },
+  }));
 
   return (
     <Layout>
@@ -148,7 +181,8 @@ const Index = () => {
         title="Holy Cross National School, Firoda | A small rural school with a big heart"
         description="Holy Cross National School, Firoda — a small Catholic primary school between Castlecomer and Ballinakill in Co. Kilkenny. Serving our community since 1962. Junior Infants 2026–27 enrolment open now."
       />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schoolJsonLd) }} />
+      <JsonLd id="ld-school" data={schoolJsonLd} />
+      <JsonLd id="ld-events" data={eventsJsonLd} />
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-cream grain-overlay">
