@@ -40,6 +40,8 @@ const navigation: NavItem[] = [
     name: "Activities",
     href: "/activities",
     children: [
+      { name: "School Mural", href: "/activities/school-mural" },
+      { name: "School Garden", href: "/activities/school-garden" },
       { name: "Creative School", href: "/activities/creative-school" },
       { name: "Amber Flag", href: "/activities/amber-flag" },
       { name: "Active Flag", href: "/activities/active-flag" },
@@ -52,6 +54,20 @@ const navigation: NavItem[] = [
     ],
   },
   { name: "After School", href: "/after-school" },
+  {
+    name: "Archive",
+    href: "/archive",
+    children: [
+      { name: "1916 Commemoration", href: "/archive/1916" },
+      { name: "Museum", href: "/archive/museum" },
+      { name: "Castlecomer", href: "/archive/castlecomer" },
+      { name: "GAA Grounds", href: "/archive/gaa-grounds" },
+      { name: "The Demesne", href: "/archive/demesne" },
+      { name: "Golf Course", href: "/archive/golf-course" },
+      { name: "Coal Mining", href: "/archive/coal-mining" },
+      { name: "The Bracelet", href: "/archive/bracelet" },
+    ],
+  },
   { name: "Contact", href: "/contact" },
 ];
 

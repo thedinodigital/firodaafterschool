@@ -447,39 +447,33 @@ const Index = () => {
         </div>
       </section>
 
-      {/* AFTER SCHOOL FEATURE */}
+      {/* AFTER SCHOOL FEATURE — framed as a benefit of choosing Holy Cross */}
       <section className="bg-cream-warm">
         <div className="container py-20 lg:py-28">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-background border border-foreground/10 text-[11px] font-semibold text-foreground/70 mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                A separate, family-run service
-              </div>
+              <p className="label-eyebrow mb-4">A benefit of choosing Holy Cross</p>
 
               <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
-                After 2.30? Firoda{" "}
-                <span className="italic text-accent">After School</span> has you covered.
+                <span className="italic text-accent">Stay a little longer.</span>{" "}
+                Firoda After School is on-site too.
               </h2>
 
               <p className="mt-6 text-lg text-foreground/75 leading-relaxed max-w-xl">
-                A warm, well-supervised after-school service operating on the school grounds —
-                independently run, but a natural extension of the school day for families
-                who need a little more time.
+                Working parents need flexibility. Families who choose Holy Cross also have
+                access to Firoda After School — a friendly, well-run after-school programme
+                operating right here in the school building, until 6pm.
               </p>
 
-              <ul className="mt-8 grid sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+              <ul className="mt-8 space-y-3 text-sm">
                 {[
-                  "Supervised care from 2.30pm",
-                  "Homework support",
-                  "Indoor & outdoor play",
-                  "Healthy snack provided",
-                  "Arts, crafts & quiet reading",
-                  "Pick-up available until 6pm",
+                  "On-site at the school — no second pickup, no second drop-off",
+                  "Open until 6pm on school days",
+                  "Familiar building, familiar faces",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-foreground/80">
-                    <span className="mt-1.5 w-1 h-1 rounded-full bg-accent flex-shrink-0" />
-                    {item}
+                  <li key={item} className="flex items-start gap-3 text-foreground/85">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -491,6 +485,11 @@ const Index = () => {
                   </Link>
                 </Button>
               </div>
+
+              <p className="mt-8 text-xs text-foreground/55 leading-relaxed max-w-md">
+                Firoda After School is run as a separate business — see the After School
+                page for full details.
+              </p>
             </div>
 
             <div className="lg:col-span-6 order-1 lg:order-2">
