@@ -6,51 +6,55 @@
 
 @layer base {
   :root {
-    /* Warm editorial palette — Holy Cross N.S. Firoda */
+    /* Holy Cross N.S. Firoda — crest-led palette: teal + antique gold on cream paper */
     --background: 41 36% 92%;          /* #f4efe4 warm cream paper */
     --background-alt: 39 35% 86%;      /* #ebe2d0 warmer cream */
-    --foreground: 150 22% 13%;         /* #1a2820 deep ink green-black */
+    --foreground: 180 33% 9%;          /* #0f1f1f cool teal-ink */
+    --foreground-soft: 184 14% 27%;    /* #3a4d4e softer ink */
 
     --card: 41 36% 95%;
-    --card-foreground: 150 22% 13%;
+    --card-foreground: 180 33% 9%;
 
     --popover: 41 36% 95%;
-    --popover-foreground: 150 22% 13%;
+    --popover-foreground: 180 33% 9%;
 
-    --primary: 145 24% 23%;            /* #2d4a3a forest green */
+    --primary: 182 58% 18%;            /* #13494b teal-deep — brand */
     --primary-foreground: 41 36% 95%;
 
-    --primary-deep: 148 27% 16%;       /* #1e3428 deeper forest */
+    --primary-deep: 184 58% 12%;       /* #0c3134 deeper teal for footers */
+    --primary-rich: 184 58% 25%;       /* #1b6065 mid-tone, hover */
+    --primary-soft: 181 17% 58%;       /* #7da9aa muted teal */
 
     --secondary: 39 35% 86%;
-    --secondary-foreground: 150 22% 13%;
+    --secondary-foreground: 180 33% 9%;
 
     --muted: 39 30% 82%;
-    --muted-foreground: 150 12% 32%;
+    --muted-foreground: 184 14% 27%;
 
-    --accent: 17 49% 57%;              /* #c67b5c terracotta */
+    --accent: 35 53% 53%;              /* #c89545 antique gold */
     --accent-foreground: 41 36% 95%;
 
-    --accent-soft: 19 56% 80%;         /* #e8c4b0 pale terracotta */
+    --accent-soft: 36 56% 74%;         /* #e0c896 soft gold */
 
-    --gold: 39 58% 58%;                /* #d4a853 gold detail */
+    --gold: 35 53% 53%;                /* consolidated — same as accent */
+    --gold-soft: 36 56% 74%;
 
     --destructive: 0 70% 45%;
     --destructive-foreground: 41 36% 95%;
 
     --border: 39 22% 76%;
     --input: 39 22% 76%;
-    --ring: 145 24% 23%;
+    --ring: 35 53% 53%;                /* gold focus ring */
 
     --radius: 0.5rem;
 
     /* Custom tokens */
-    --shadow-soft: 0 4px 20px -8px hsl(150 22% 13% / 0.15);
-    --shadow-card: 0 8px 32px -12px hsl(150 22% 13% / 0.18);
-    --shadow-elevated: 0 24px 60px -20px hsl(150 22% 13% / 0.25);
-    --shadow-float: 0 12px 30px -12px hsl(150 22% 13% / 0.22);
+    --shadow-soft: 0 4px 20px -8px hsl(180 33% 9% / 0.15);
+    --shadow-card: 0 8px 32px -12px hsl(180 33% 9% / 0.18);
+    --shadow-elevated: 0 24px 60px -20px hsl(180 33% 9% / 0.25);
+    --shadow-float: 0 12px 30px -12px hsl(180 33% 9% / 0.22);
 
-    --footer-background: 148 27% 13%;
+    --footer-background: 184 58% 10%;
     --footer-foreground: 41 30% 88%;
     --footer-muted: 41 15% 65%;
 
@@ -65,25 +69,25 @@
   }
 
   .dark {
-    --background: 148 27% 10%;
+    --background: 184 58% 8%;
     --foreground: 41 30% 92%;
-    --card: 148 27% 13%;
+    --card: 184 58% 11%;
     --card-foreground: 41 30% 92%;
-    --popover: 148 27% 13%;
+    --popover: 184 58% 11%;
     --popover-foreground: 41 30% 92%;
-    --primary: 17 49% 60%;
-    --primary-foreground: 148 27% 10%;
-    --secondary: 148 20% 20%;
+    --primary: 35 53% 58%;
+    --primary-foreground: 184 58% 8%;
+    --secondary: 184 30% 18%;
     --secondary-foreground: 41 30% 92%;
-    --muted: 148 18% 18%;
+    --muted: 184 25% 16%;
     --muted-foreground: 41 15% 65%;
-    --accent: 17 49% 60%;
-    --accent-foreground: 148 27% 10%;
+    --accent: 35 53% 58%;
+    --accent-foreground: 184 58% 8%;
     --destructive: 0 62% 35%;
     --destructive-foreground: 41 30% 92%;
-    --border: 148 18% 22%;
-    --input: 148 18% 22%;
-    --ring: 17 49% 60%;
+    --border: 184 25% 20%;
+    --input: 184 25% 20%;
+    --ring: 35 53% 58%;
   }
 }
 
@@ -99,8 +103,8 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
     background-image:
-      radial-gradient(hsl(150 22% 13% / 0.025) 1px, transparent 1px),
-      radial-gradient(hsl(150 22% 13% / 0.018) 1px, transparent 1px);
+      radial-gradient(hsl(180 33% 9% / 0.025) 1px, transparent 1px),
+      radial-gradient(hsl(180 33% 9% / 0.018) 1px, transparent 1px);
     background-size: 4px 4px, 7px 7px;
     background-position: 0 0, 2px 2px;
   }
@@ -135,6 +139,11 @@
   .bg-cream-warm { background-color: hsl(var(--background-alt)); }
   .bg-forest { background-color: hsl(var(--primary)); }
   .bg-forest-deep { background-color: hsl(var(--primary-deep)); }
+  .bg-teal { background-color: hsl(var(--primary)); }
+  .bg-teal-deep { background-color: hsl(var(--primary-deep)); }
+  .bg-teal-rich { background-color: hsl(var(--primary-rich)); }
+  .text-teal-soft { color: hsl(var(--primary-soft)); }
+  .bg-teal-soft { background-color: hsl(var(--primary-soft)); }
 
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
