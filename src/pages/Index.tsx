@@ -325,14 +325,18 @@ const Index = () => {
                   the gate yourself.
                 </p>
               </div>
+              {/* TODO[school]: Replace with the Principal's name, role and ideally a small photo (square, ~200×200, JPG). */}
               <div className="mt-10 flex items-center gap-4 pt-6 border-t border-foreground/10">
-                <div className="w-12 h-12 rounded-full bg-primary text-background flex items-center justify-center font-heading italic">
-                  P
+                <div className="w-12 h-12 rounded-full bg-primary text-background flex items-center justify-center font-heading italic text-lg" aria-hidden="true">
+                  HC
                 </div>
-                <div>
-                  <p className="font-heading text-base">[Principal's name]</p>
-                  <p className="text-xs text-foreground/60">Principal, Holy Cross N.S.</p>
+                <div className="flex-1">
+                  <p className="font-heading text-base">The Principal &amp; staff</p>
+                  <p className="text-xs text-foreground/60">Holy Cross N.S., Firoda</p>
                 </div>
+                <span className="hidden sm:inline-flex items-center text-[10px] uppercase tracking-widest text-foreground/45 border border-foreground/15 rounded-full px-3 py-1">
+                  Signature pending
+                </span>
               </div>
             </div>
           </div>
