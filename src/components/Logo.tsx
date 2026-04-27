@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import crest from "@/assets/logo.png";
 
 interface LogoProps {
   className?: string;
@@ -7,6 +8,10 @@ interface LogoProps {
   showWordmark?: boolean;
 }
 
+/**
+ * Site logo: the Holy Cross Firoda crest + wordmark.
+ * Mobile shows the crest only; from sm: upward, the wordmark sits beside it.
+ */
 export function Logo({ className, variant = "default", showWordmark = true }: LogoProps) {
   const isCream = variant === "cream";
   return (
@@ -15,26 +20,17 @@ export function Logo({ className, variant = "default", showWordmark = true }: Lo
       className={cn("flex items-center gap-3 group", className)}
       aria-label="Holy Cross National School, Firoda — Home"
     >
-      <div className="relative">
-        <span
-          className={cn(
-            "flex items-center justify-center w-11 h-11 rounded-full transition-transform group-hover:scale-105",
-            isCream ? "bg-background text-primary" : "bg-primary text-background"
-          )}
-        >
-          <span className="font-heading italic text-2xl font-medium leading-none -mt-0.5">H</span>
-        </span>
-        <span
-          className={cn(
-            "absolute inset-0 rounded-full border pointer-events-none",
-            isCream ? "border-accent-soft/70" : "border-accent/70"
-          )}
-          style={{ transform: "scale(1.18)" }}
-          aria-hidden="true"
-        />
-      </div>
+      <img
+        src={crest}
+        alt=""
+        aria-hidden="true"
+        className={cn(
+          "h-9 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105",
+          isCream && "opacity-90"
+        )}
+      />
       {showWordmark && (
-        <div className="leading-tight">
+        <div className="leading-tight hidden sm:block pl-1">
           <div
             className={cn(
               "font-heading text-[17px] font-medium",

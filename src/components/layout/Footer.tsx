@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Logo } from "@/components/Logo";
 import { Mail, Phone, MapPin, Twitter } from "lucide-react";
+import crest from "@/assets/logo.png";
 
 const cols = [
   {
@@ -41,7 +41,22 @@ export function Footer() {
       <div className="container py-16 lg:py-20">
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
           <div className="lg:col-span-1 space-y-5">
-            <Logo variant="cream" />
+            <Link to="/" className="inline-flex flex-col gap-3 group" aria-label="Holy Cross National School, Firoda — Home">
+              <img
+                src={crest}
+                alt=""
+                aria-hidden="true"
+                className="h-14 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+              />
+              <div className="leading-tight">
+                <div className="font-heading text-[17px] font-medium text-background">
+                  Holy <span className="italic">Cross</span>
+                </div>
+                <div className="uppercase text-[9px] tracking-[0.22em] font-semibold text-background/70">
+                  Firoda · Est. 1962
+                </div>
+              </div>
+            </Link>
             <p className="text-sm text-footer-foreground/75 leading-relaxed max-w-xs">
               A small rural primary school serving the community between Castlecomer
               and Ballinakill since 1962.

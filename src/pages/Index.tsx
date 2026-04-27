@@ -6,7 +6,6 @@ import {
   Pencil,
   Music2,
   Users,
-  Trophy,
   ChevronRight,
   Trees,
   Shield,
@@ -25,6 +24,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SchoolhouseSVG, AfterSchoolSceneSVG } from "@/components/illustrations/SchoolhouseSVG";
+import { HurleysIcon } from "@/components/icons/HurleysIcon";
 import { newsItems, upcomingEvents, facilities, homeFaqs, lifeAtSchool, achievements } from "@/data/content";
 
 const achievementIcon = (key: string) => {
@@ -34,13 +34,13 @@ const achievementIcon = (key: string) => {
 };
 
 const lifeIcon = (key: string) => {
-  if (key === "active") return Trophy;
+  if (key === "active") return HurleysIcon; // hurleys & sliotar from the crest
   if (key === "music") return Music2;
   return Users;
 };
 
 const facilityIcon = (key: string) => {
-  if (key === "field" || key === "hurl") return Trophy;
+  if (key === "field" || key === "hurl") return HurleysIcon; // GAA / hurling pitches
   if (key === "indoor") return Building2;
   if (key === "classroom") return GraduationCap;
   if (key === "yard") return HandHeart;
@@ -64,11 +64,11 @@ const eventBadge = (iso: string) => {
 const NewsThumb = ({ kind }: { kind?: string }) => {
   // Brand-coloured illustrative thumbnails — no stock photos
   const palette = {
-    books: { bg: "#ebe2d0", a: "#2d4a3a", b: "#c67b5c" },
-    field: { bg: "#1e3428", a: "#d4a853", b: "#e8c4b0" },
-    music: { bg: "#e8c4b0", a: "#1e3428", b: "#2d4a3a" },
-    community: { bg: "#ebe2d0", a: "#1e3428", b: "#c67b5c" },
-    art: { bg: "#f4efe4", a: "#c67b5c", b: "#2d4a3a" },
+    books: { bg: "#ebe2d0", a: "#13494b", b: "#c89545" },
+    field: { bg: "#0c3134", a: "#c89545", b: "#e0c896" },
+    music: { bg: "#e0c896", a: "#0c3134", b: "#13494b" },
+    community: { bg: "#ebe2d0", a: "#13494b", b: "#c89545" },
+    art: { bg: "#f4efe4", a: "#c89545", b: "#13494b" },
   } as const;
   const k = (kind || "books") as keyof typeof palette;
   const p = palette[k];
@@ -257,8 +257,13 @@ const Index = () => {
             <div className="lg:col-span-9 grid sm:grid-cols-3 gap-6">
               {achievements.map((a) => {
                 const Icon = achievementIcon(a.icon);
+                // Active = teal-rich, Amber = gold (kept), Creative = teal-soft (was terracotta)
                 const ring =
-                  a.icon === "active" ? "bg-primary" : a.icon === "amber" ? "bg-gold" : "bg-accent";
+                  a.icon === "active"
+                    ? "bg-primary-rich"
+                    : a.icon === "amber"
+                    ? "bg-gold"
+                    : "bg-primary-soft";
                 return (
                   <div key={a.name} className="flex items-start gap-4">
                     <div className={`w-11 h-11 rounded-full ${ring} flex items-center justify-center flex-shrink-0`}>

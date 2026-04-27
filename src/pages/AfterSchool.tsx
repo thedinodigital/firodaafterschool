@@ -148,10 +148,10 @@ const AfterSchool = () => {
       {/* HERO — warmer, more domestic feel */}
       <section className="relative overflow-hidden bg-cream-warm grain-overlay">
         <div
-          className="absolute inset-0 pointer-events-none opacity-60"
+          className="absolute inset-0 pointer-events-none opacity-70"
           style={{
             background:
-              "radial-gradient(ellipse at top right, hsl(var(--accent-soft) / 0.45), transparent 60%)",
+              "radial-gradient(ellipse at top right, hsl(var(--gold-soft) / 0.55), transparent 60%)",
           }}
           aria-hidden="true"
         />
