@@ -23,6 +23,16 @@ const cols = [
       { name: "Bí Cineálta", href: "/parents/bi-cinealta" },
     ],
   },
+  {
+    title: "More",
+    links: [
+      { name: "News & Events", href: "/news" },
+      { name: "Activities", href: "/activities" },
+      { name: "After School", href: "/after-school" },
+      { name: "Archive", href: "/archive" },
+      { name: "Policies", href: "/policies" },
+    ],
+  },
 ];
 
 export function Footer() {

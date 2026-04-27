@@ -5,6 +5,8 @@ import { Seo } from "@/components/Seo";
 import { PageHero } from "@/components/PageHero";
 
 export const activitiesList = [
+  { slug: "school-mural", name: "School Mural", desc: "A community-painted mural at the heart of the school grounds." },
+  { slug: "school-garden", name: "School Garden", desc: "Raised beds, herbs and seasonal planting tended by every class." },
   { slug: "creative-school", name: "Creative School", desc: "Working with the Arts Council on a year-long programme of creativity." },
   { slug: "amber-flag", name: "Amber Flag", desc: "Our work on positive mental health and wellbeing across the school." },
   { slug: "active-flag", name: "Active Flag", desc: "Sport, movement and play built into every day." },
