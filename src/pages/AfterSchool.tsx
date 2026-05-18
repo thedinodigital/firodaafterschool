@@ -521,9 +521,14 @@ const AfterSchool = () => {
             Firoda After School is operated as a separate business at Holy Cross N.S.,
             Firoda. For school enquiries, please visit the{" "}
             <Link to="/" className="underline underline-offset-2 hover:text-accent">
-              school home page
+            school home page
             </Link>
             .
+          </p>
+          <p className="mt-3 text-xs text-foreground/40">
+            <Link to="/afterschool-admin/login" className="hover:text-accent underline-offset-2 hover:underline">
+              Staff sign in
+            </Link>
           </p>
         </div>
       </section>
