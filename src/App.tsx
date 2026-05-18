@@ -53,6 +53,19 @@ const AdminNewsList = lazy(() => import("./pages/admin/NewsList"));
 const AdminNewsEditor = lazy(() => import("./pages/admin/NewsEditor"));
 const AdminPlanning = lazy(() => import("./pages/admin/Planning"));
 const AdminPlanningAppeal = lazy(() => import("./pages/admin/PlanningAppeal"));
+
+// Afterschool (FAS)
+const FasLogin = lazy(() => import("./pages/afterschool/Login"));
+const FasDashboard = lazy(() => import("./pages/afterschool/Dashboard"));
+const FasRegister = lazy(() => import("./pages/afterschool/Register"));
+const FasChildren = lazy(() => import("./pages/afterschool/Children"));
+const FasChildEditor = lazy(() => import("./pages/afterschool/ChildEditor"));
+const FasStaff = lazy(() => import("./pages/afterschool/Staff"));
+const FasInvoices = lazy(() => import("./pages/afterschool/Invoices"));
+const FasInvoiceNew = lazy(() => import("./pages/afterschool/InvoiceNew"));
+const FasInvoiceDetail = lazy(() => import("./pages/afterschool/InvoiceDetail"));
+const FasSettings = lazy(() => import("./pages/afterschool/Settings"));
+
 import { AuthProvider } from "./hooks/useAuth";
 import { RequireAuth } from "./pages/admin/RequireAuth";
 
@@ -119,6 +132,19 @@ const App = () => (
               <Route path="/admin/news/:id/edit" element={<RequireAuth><AdminNewsEditor /></RequireAuth>} />
               <Route path="/admin/planning" element={<RequireAuth><AdminPlanning /></RequireAuth>} />
               <Route path="/admin/planning/appeal" element={<RequireAuth><AdminPlanningAppeal /></RequireAuth>} />
+
+              {/* Afterschool (FAS) */}
+              <Route path="/afterschool-admin/login" element={<FasLogin />} />
+              <Route path="/afterschool-admin" element={<FasDashboard />} />
+              <Route path="/afterschool-admin/register" element={<FasRegister />} />
+              <Route path="/afterschool-admin/children" element={<FasChildren />} />
+              <Route path="/afterschool-admin/children/new" element={<FasChildEditor />} />
+              <Route path="/afterschool-admin/children/:id/edit" element={<FasChildEditor />} />
+              <Route path="/afterschool-admin/staff" element={<FasStaff />} />
+              <Route path="/afterschool-admin/invoices" element={<FasInvoices />} />
+              <Route path="/afterschool-admin/invoices/new" element={<FasInvoiceNew />} />
+              <Route path="/afterschool-admin/invoices/:id" element={<FasInvoiceDetail />} />
+              <Route path="/afterschool-admin/settings" element={<FasSettings />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
