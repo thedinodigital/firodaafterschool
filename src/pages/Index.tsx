@@ -381,6 +381,59 @@ const Index = () => {
         </div>
       </section>
 
+      {/* FROM THE ARCHIVE — featured */}
+      <section className="bg-cream">
+        <div className="container py-20 lg:py-24">
+          <div className="max-w-2xl mb-12">
+            <p className="label-eyebrow mb-4">From the archive</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-medium leading-[1.1] text-balance">
+              A long memory of this corner of <span className="italic text-accent">Kilkenny</span>.
+            </h2>
+            <p className="mt-5 text-foreground/70 leading-relaxed">
+              Castlecomer's coal-mining past, the Bronze Age bracelet found in a field at
+              Firoda, the GAA grounds, the 1916 commemoration — we keep them all. Have a
+              look around.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {["coal-mining", "bracelet", "gaa-grounds"].map((slug) => {
+              const a = archiveList.find((x) => x.slug === slug)!;
+              return (
+                <Link
+                  key={slug}
+                  to={`/archive/${slug}`}
+                  className="group flex flex-col rounded-2xl border border-foreground/10 bg-cream-warm overflow-hidden hover:shadow-soft transition-shadow"
+                >
+                  <div className="aspect-[5/4] bg-cream border-b border-foreground/10" aria-hidden="true" />
+                  <div className="p-6 flex flex-col flex-1">
+                    <span className="label-eyebrow text-accent mb-2">{a.date}</span>
+                    <h3 className="font-heading italic text-2xl text-foreground leading-tight">
+                      {a.name}
+                    </h3>
+                    <p className="mt-3 text-foreground/70 text-sm leading-relaxed flex-1">
+                      {a.desc}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:text-accent transition-colors">
+                      Read <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-10">
+            <Link
+              to="/archive"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition-colors"
+            >
+              Explore the whole archive <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* PRACTICAL SCHOOL INFO */}
       <section className="bg-cream">
         <div className="container py-20 lg:py-24">
