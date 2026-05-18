@@ -2,10 +2,12 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
+export type StaffRole = "admin" | "editor" | "fas_owner";
+
 interface StaffProfile {
   id: string;
   full_name: string;
-  role: "admin" | "editor";
+  role: StaffRole;
 }
 
 interface AuthContextValue {

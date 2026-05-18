@@ -2,7 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
-  const { session, loading } = useAuth();
+  const { session, profile, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -20,6 +20,11 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
 
   if (!session) {
     return <Navigate to="/admin/login" replace state={{ from: location }} />;
+  }
+
+  // FAS owners are blocked from the school portal — strictly separate systems.
+  if (profile?.role === "fas_owner") {
+    return <Navigate to="/afterschool-admin" replace />;
   }
 
   return <>{children}</>;
