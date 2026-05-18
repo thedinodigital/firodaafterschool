@@ -222,6 +222,30 @@ export type Database = {
           },
         ]
       }
+      fas_gallery_images: {
+        Row: {
+          caption: string | null
+          created_at: string
+          file_path: string
+          id: string
+          sort_order: number
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          file_path: string
+          id?: string
+          sort_order?: number
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          file_path?: string
+          id?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
       fas_garda_vetting_records: {
         Row: {
           created_at: string
@@ -411,6 +435,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      fas_page_content: {
+        Row: {
+          content: Json
+          id: number
+          updated_at: string
+        }
+        Insert: {
+          content?: Json
+          id?: number
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          id?: number
+          updated_at?: string
+        }
+        Relationships: []
       }
       fas_ratio_breach_events: {
         Row: {
