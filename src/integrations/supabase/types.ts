@@ -222,6 +222,42 @@ export type Database = {
           },
         ]
       }
+      fas_garda_vetting_records: {
+        Row: {
+          created_at: string
+          document_type: string
+          expiry_date: string | null
+          file_name: string | null
+          file_path: string | null
+          id: string
+          issue_date: string | null
+          notes: string | null
+          staff_id: string
+        }
+        Insert: {
+          created_at?: string
+          document_type?: string
+          expiry_date?: string | null
+          file_name?: string | null
+          file_path?: string | null
+          id?: string
+          issue_date?: string | null
+          notes?: string | null
+          staff_id: string
+        }
+        Update: {
+          created_at?: string
+          document_type?: string
+          expiry_date?: string | null
+          file_name?: string | null
+          file_path?: string | null
+          id?: string
+          issue_date?: string | null
+          notes?: string | null
+          staff_id?: string
+        }
+        Relationships: []
+      }
       fas_guardians: {
         Row: {
           child_id: string
@@ -268,6 +304,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      fas_incidents: {
+        Row: {
+          action_taken: string | null
+          category: string
+          child_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          occurred_at: string
+          parent_notified: boolean
+          reported_by: string | null
+          summary: string
+          updated_at: string
+        }
+        Insert: {
+          action_taken?: string | null
+          category?: string
+          child_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          occurred_at?: string
+          parent_notified?: boolean
+          reported_by?: string | null
+          summary: string
+          updated_at?: string
+        }
+        Update: {
+          action_taken?: string | null
+          category?: string
+          child_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          occurred_at?: string
+          parent_notified?: boolean
+          reported_by?: string | null
+          summary?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       fas_invoices: {
         Row: {
