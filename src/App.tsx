@@ -51,6 +51,8 @@ const AdminLogin = lazy(() => import("./pages/admin/Login"));
 const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
 const AdminNewsList = lazy(() => import("./pages/admin/NewsList"));
 const AdminNewsEditor = lazy(() => import("./pages/admin/NewsEditor"));
+const AdminPlanning = lazy(() => import("./pages/admin/Planning"));
+const AdminPlanningAppeal = lazy(() => import("./pages/admin/PlanningAppeal"));
 import { AuthProvider } from "./hooks/useAuth";
 import { RequireAuth } from "./pages/admin/RequireAuth";
 
@@ -115,6 +117,8 @@ const App = () => (
               <Route path="/admin/news" element={<RequireAuth><AdminNewsList /></RequireAuth>} />
               <Route path="/admin/news/new" element={<RequireAuth><AdminNewsEditor /></RequireAuth>} />
               <Route path="/admin/news/:id/edit" element={<RequireAuth><AdminNewsEditor /></RequireAuth>} />
+              <Route path="/admin/planning" element={<RequireAuth><AdminPlanning /></RequireAuth>} />
+              <Route path="/admin/planning/appeal" element={<RequireAuth><AdminPlanningAppeal /></RequireAuth>} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
