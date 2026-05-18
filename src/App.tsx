@@ -46,6 +46,14 @@ const ArchivePage = lazy(() => import("./pages/archive/ArchivePage"));
 // Contact
 const Contact = lazy(() => import("./pages/Contact"));
 
+// Admin
+const AdminLogin = lazy(() => import("./pages/admin/Login"));
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
+const AdminNewsList = lazy(() => import("./pages/admin/NewsList"));
+const AdminNewsEditor = lazy(() => import("./pages/admin/NewsEditor"));
+import { AuthProvider } from "./hooks/useAuth";
+import { RequireAuth } from "./pages/admin/RequireAuth";
+
 const queryClient = new QueryClient();
 
 const Loading = () => (
