@@ -314,28 +314,48 @@ const Index = () => {
             <p className="mt-3 text-foreground/65">From around the school this term.</p>
           </div>
 
-          <ul className="divide-y divide-foreground/10 border-y border-foreground/10">
-            {recentNews.map((n) => (
-              <li key={n.slug} className="py-6">
-                <Link
-                  to={`/news/${n.slug}`}
-                  className="group grid sm:grid-cols-12 gap-2 sm:gap-6 items-baseline"
-                >
-                  <div className="sm:col-span-3 text-xs text-foreground/55 uppercase tracking-wider">
-                    <time dateTime={n.date}>{formatDate(n.date)}</time>
-                    <span className="mx-2">·</span>
-                    <span>{n.category}</span>
+          {newsLoading && (
+            <ul className="divide-y divide-foreground/10 border-y border-foreground/10">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <li key={i} className="py-6">
+                  <div className="grid sm:grid-cols-12 gap-2 sm:gap-6">
+                    <div className="sm:col-span-3 h-4 rounded bg-cream-warm motion-safe:animate-pulse" />
+                    <div className="sm:col-span-9 space-y-2">
+                      <div className="h-5 w-3/4 rounded bg-cream-warm motion-safe:animate-pulse" />
+                      <div className="h-4 w-full rounded bg-cream-warm motion-safe:animate-pulse" />
+                    </div>
                   </div>
-                  <div className="sm:col-span-9">
-                    <h3 className="font-heading text-xl font-medium leading-snug group-hover:text-accent transition-colors">
-                      {n.title}
-                    </h3>
-                    <p className="mt-1 text-foreground/65 text-sm leading-relaxed">{n.excerpt}</p>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          )}
+          {newsError && (
+            <p className="text-foreground/65">News couldn't be loaded — please try again later.</p>
+          )}
+          {!newsLoading && !newsError && (
+            <ul className="divide-y divide-foreground/10 border-y border-foreground/10">
+              {recentNews.map((n) => (
+                <li key={n.slug} className="py-6">
+                  <Link
+                    to={`/news/${n.slug}`}
+                    className="group grid sm:grid-cols-12 gap-2 sm:gap-6 items-baseline"
+                  >
+                    <div className="sm:col-span-3 text-xs text-foreground/55 uppercase tracking-wider">
+                      <time dateTime={n.date}>{formatDate(n.date)}</time>
+                      <span className="mx-2">·</span>
+                      <span>{n.category}</span>
+                    </div>
+                    <div className="sm:col-span-9">
+                      <h3 className="font-heading text-xl font-medium leading-snug group-hover:text-accent transition-colors">
+                        {n.title}
+                      </h3>
+                      <p className="mt-1 text-foreground/65 text-sm leading-relaxed">{n.excerpt}</p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div className="mt-8">
             <Link
