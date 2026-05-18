@@ -4,7 +4,8 @@ import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
 import { JsonLd, SITE_URL } from "@/components/JsonLd";
 import { Button } from "@/components/ui/button";
-import { newsItems, upcomingEvents, achievements } from "@/data/content";
+import { newsItems, upcomingEvents, achievements, thisWeek } from "@/data/content";
+import { archiveList } from "./archive/Archive";
 import heroChildren from "@/assets/hero-children.jpg";
 import schoolExterior from "@/assets/school-exterior.jpg";
 
