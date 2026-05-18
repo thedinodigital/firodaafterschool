@@ -394,11 +394,13 @@ function ProjectionGrid({
   currentYear,
   scenario,
   thresholds,
+  editableCurrent,
 }: {
   current: Record<YearGroup, number>;
   currentYear: string;
   scenario: Scenario;
   thresholds: StaffingThreshold[];
+  editableCurrent?: { snapshots: Record<YearGroup, EnrolmentSnapshot | undefined> };
 }) {
   const projection = computeProjection(current, currentYear, scenario, thresholds, 5);
 
@@ -411,13 +413,27 @@ function ProjectionGrid({
 
   return (
     <div className="overflow-x-auto -mx-6 md:mx-0">
+      {editableCurrent && (
+        <p className="px-3 mb-2 text-xs text-foreground/55 italic">
+          Tip: click any number in the <strong className="not-italic font-medium text-foreground/75">{currentYear.replace("-", "–")}</strong> column to enter the actual headcount. Future years recalculate automatically.
+        </p>
+      )}
       <table className="min-w-full text-sm border-collapse">
         <thead>
           <tr className="border-b border-foreground/15">
             <th className="text-left py-2 px-3 font-medium text-foreground/70">Year group</th>
-            {projection.map((p) => (
-              <th key={p.academic_year} className="text-center py-2 px-3 font-medium text-foreground/70 whitespace-nowrap">
+            {projection.map((p, i) => (
+              <th
+                key={p.academic_year}
+                className={cn(
+                  "text-center py-2 px-3 font-medium whitespace-nowrap",
+                  editableCurrent && i === 0 ? "text-primary" : "text-foreground/70"
+                )}
+              >
                 {p.academic_year.replace("-", "–")}
+                {editableCurrent && i === 0 && (
+                  <span className="block text-[10px] uppercase tracking-wider opacity-70">actual</span>
+                )}
               </th>
             ))}
           </tr>
@@ -426,9 +442,24 @@ function ProjectionGrid({
           {YEAR_GROUPS.map((yg) => (
             <tr key={yg} className="border-b border-foreground/5">
               <td className="py-2 px-3">{YEAR_GROUP_LABELS[yg]}</td>
-              {projection.map((p) => (
-                <td key={p.academic_year} className="text-center py-2 px-3 tabular-nums">
-                  {p.counts[yg]}
+              {projection.map((p, i) => (
+                <td
+                  key={p.academic_year}
+                  className={cn(
+                    "text-center tabular-nums",
+                    editableCurrent && i === 0 ? "p-1" : "py-2 px-3"
+                  )}
+                >
+                  {editableCurrent && i === 0 ? (
+                    <InlineCountCell
+                      academicYear={currentYear}
+                      yearGroup={yg}
+                      snapshot={editableCurrent.snapshots[yg]}
+                      initial={p.counts[yg]}
+                    />
+                  ) : (
+                    p.counts[yg]
+                  )}
                 </td>
               ))}
             </tr>
@@ -461,6 +492,77 @@ function ProjectionGrid({
         </tbody>
       </table>
     </div>
+  );
+}
+
+function InlineCountCell({
+  academicYear,
+  yearGroup,
+  snapshot,
+  initial,
+}: {
+  academicYear: string;
+  yearGroup: YearGroup;
+  snapshot: EnrolmentSnapshot | undefined;
+  initial: number;
+}) {
+  const qc = useQueryClient();
+  const { user } = useAuth();
+  const [value, setValue] = useState<string>(String(initial));
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    setValue(String(initial));
+  }, [initial]);
+
+  const commit = async () => {
+    const next = Math.max(0, parseInt(value || "0", 10) || 0);
+    if (next === initial) {
+      setValue(String(initial));
+      return;
+    }
+    setSaving(true);
+    const { error } = await supabase
+      .from("enrolment_snapshots")
+      .upsert(
+        {
+          academic_year: academicYear,
+          year_group: yearGroup,
+          count: next,
+          notes: snapshot?.notes ?? null,
+          is_current: true,
+          updated_at: new Date().toISOString(),
+          updated_by: user?.id ?? null,
+        },
+        { onConflict: "academic_year,year_group" }
+      );
+    setSaving(false);
+    if (error) {
+      toast.error("Couldn't save — please try again.");
+      setValue(String(initial));
+    } else {
+      toast.success(`${YEAR_GROUP_LABELS[yearGroup]} updated`);
+      qc.invalidateQueries({ queryKey: ["enrolment_snapshots"] });
+    }
+  };
+
+  return (
+    <input
+      type="number"
+      min={0}
+      value={value}
+      disabled={saving}
+      onChange={(e) => setValue(e.target.value)}
+      onBlur={commit}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+        if (e.key === "Escape") {
+          setValue(String(initial));
+          (e.target as HTMLInputElement).blur();
+        }
+      }}
+      className="w-14 mx-auto text-center tabular-nums bg-background border border-foreground/15 rounded-md py-1.5 px-1 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary disabled:opacity-50"
+    />
   );
 }
 
