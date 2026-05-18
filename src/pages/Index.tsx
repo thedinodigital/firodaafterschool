@@ -154,8 +154,15 @@ const Index = () => {
       </section>
 
       {/* PRINCIPAL'S WELCOME */}
-      <section className="bg-cream-warm">
-        <div className="container py-20 lg:py-28">
+      <section className="relative overflow-hidden bg-cream-warm">
+        {/* crest watermark */}
+        <img
+          src="/firoda-crest.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] max-w-none opacity-[0.05] -z-0 motion-safe:animate-fade-in"
+        />
+        <div className="container py-20 lg:py-28 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <p className="label-eyebrow mb-5">A welcome from the school</p>
             <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
@@ -183,6 +190,50 @@ const Index = () => {
             <p className="italic text-foreground/65 pt-2">
               — The staff and Board of Management, Holy Cross N.S.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* THIS WEEK AT FIRODA */}
+      <section className="bg-cream">
+        <div className="container py-20 lg:py-24">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+            <div className="lg:col-span-4">
+              <p className="label-eyebrow mb-4">This week</p>
+              <h2 className="font-heading text-3xl md:text-4xl font-medium leading-[1.1] text-balance">
+                What's on this week at <span className="italic text-accent">Firoda</span>.
+              </h2>
+              <p className="mt-5 text-foreground/70 leading-relaxed">
+                A quick look at the week ahead — updated each Monday by the office.
+              </p>
+              <p className="mt-6 inline-flex items-center gap-2 text-xs text-foreground/55">
+                <span className="w-2 h-2 rounded-full bg-primary-rich" aria-hidden="true" />
+                Updated {thisWeek.lastUpdated}
+              </p>
+            </div>
+
+            <div className="lg:col-span-8">
+              <ul className="divide-y divide-foreground/10 border-y border-foreground/10">
+                {thisWeek.items.map((it) => (
+                  <li key={it.day + it.title} className="py-5 flex items-start gap-6">
+                    <div className="w-24 sm:w-28 flex-shrink-0">
+                      <p className="font-heading text-xl text-foreground">{it.day}</p>
+                      {it.date && (
+                        <p className="label-eyebrow text-foreground/55 mt-1">{it.date}</p>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-foreground leading-snug">{it.title}</p>
+                      {it.note && (
+                        <p className="text-sm text-foreground/65 leading-relaxed mt-1">
+                          {it.note}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
