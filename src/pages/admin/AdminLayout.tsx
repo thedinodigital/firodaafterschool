@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Menu, X, LogOut, LayoutDashboard, Newspaper } from "lucide-react";
+import { Menu, X, LogOut, LayoutDashboard, Newspaper, LineChart } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 
