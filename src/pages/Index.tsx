@@ -479,8 +479,14 @@ const Index = () => {
       </section>
 
       {/* FINAL CTA STRIP */}
-      <section className="bg-forest-deep">
-        <div className="container py-12 lg:py-14">
+      <section className="relative overflow-hidden bg-forest-deep">
+        <img
+          src="/firoda-crest.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none select-none absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-[320px] max-w-none opacity-[0.08]"
+        />
+        <div className="container py-12 lg:py-14 relative z-10">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <p className="font-heading text-background text-2xl md:text-3xl font-medium leading-snug max-w-2xl text-balance">
               Considering Holy Cross for your child?{" "}
