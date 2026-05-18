@@ -221,6 +221,35 @@ function ChildEditorContent() {
         />
       </Card>
 
+      {/* Expected days */}
+      <Card title="Expected days">
+        <p className="text-sm text-foreground/60 mb-3">
+          Which weekdays is {draft.first_name || "this child"} normally booked to attend? This drives the register's "expected today" list.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {WEEKDAYS.map((d) => {
+            const on = (draft.expected_days ?? []).includes(d);
+            return (
+              <button
+                key={d}
+                type="button"
+                onClick={() => toggleDay(d)}
+                className={`px-4 py-2 rounded-full border text-sm min-h-[40px] transition ${
+                  on
+                    ? "bg-accent text-accent-foreground border-accent"
+                    : "bg-background border-foreground/15 hover:border-foreground/30"
+                }`}
+              >
+                {WEEKDAY_LABELS[d]}
+              </button>
+            );
+          })}
+        </div>
+        {(draft.expected_days ?? []).length === 0 && (
+          <p className="text-xs text-foreground/55 mt-3">No days selected — child won't appear under "expected" on the register.</p>
+        )}
+      </Card>
+
       {/* First guardian (only when creating) */}
       {isNew && (
         <Card title="Primary guardian (required)">
