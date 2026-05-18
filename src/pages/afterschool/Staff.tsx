@@ -70,7 +70,7 @@ function StaffContent() {
                 const isOpen = vettingOpenFor === s.id;
                 return (
                   <Fragment key={s.id}>
-                    <tr key={s.id} className={cn(!s.active && "opacity-50")}>
+                    <tr className={cn(!s.active && "opacity-50")}>
                       <td className="px-4 py-3 font-medium">{s.first_name} {s.last_name}</td>
                       <td className="px-4 py-3 text-foreground/70">{s.role_title}</td>
                       <td className={cn("px-4 py-3 text-xs", vettingClass)}>
