@@ -50,7 +50,13 @@ const queryClient = new QueryClient();
 
 const Loading = () => (
   <div className="min-h-screen flex items-center justify-center bg-cream">
-    <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+    <img
+      src="/firoda-crest.png"
+      alt=""
+      aria-hidden="true"
+      className="w-24 h-auto opacity-80 motion-safe:animate-pulse"
+      style={{ animationDuration: "3s" }}
+    />
   </div>
 );
 

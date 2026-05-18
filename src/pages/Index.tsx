@@ -4,7 +4,8 @@ import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
 import { JsonLd, SITE_URL } from "@/components/JsonLd";
 import { Button } from "@/components/ui/button";
-import { newsItems, upcomingEvents, achievements } from "@/data/content";
+import { newsItems, upcomingEvents, achievements, thisWeek } from "@/data/content";
+import { archiveList } from "./archive/Archive";
 import heroChildren from "@/assets/hero-children.jpg";
 import schoolExterior from "@/assets/school-exterior.jpg";
 
@@ -153,8 +154,15 @@ const Index = () => {
       </section>
 
       {/* PRINCIPAL'S WELCOME */}
-      <section className="bg-cream-warm">
-        <div className="container py-20 lg:py-28">
+      <section className="relative overflow-hidden bg-cream-warm">
+        {/* crest watermark */}
+        <img
+          src="/firoda-crest.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] max-w-none opacity-[0.05] -z-0 motion-safe:animate-fade-in"
+        />
+        <div className="container py-20 lg:py-28 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <p className="label-eyebrow mb-5">A welcome from the school</p>
             <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
@@ -182,6 +190,50 @@ const Index = () => {
             <p className="italic text-foreground/65 pt-2">
               — The staff and Board of Management, Holy Cross N.S.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* THIS WEEK AT FIRODA */}
+      <section className="bg-cream">
+        <div className="container py-20 lg:py-24">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+            <div className="lg:col-span-4">
+              <p className="label-eyebrow mb-4">This week</p>
+              <h2 className="font-heading text-3xl md:text-4xl font-medium leading-[1.1] text-balance">
+                What's on this week at <span className="italic text-accent">Firoda</span>.
+              </h2>
+              <p className="mt-5 text-foreground/70 leading-relaxed">
+                A quick look at the week ahead — updated each Monday by the office.
+              </p>
+              <p className="mt-6 inline-flex items-center gap-2 text-xs text-foreground/55">
+                <span className="w-2 h-2 rounded-full bg-primary-rich" aria-hidden="true" />
+                Updated {thisWeek.lastUpdated}
+              </p>
+            </div>
+
+            <div className="lg:col-span-8">
+              <ul className="divide-y divide-foreground/10 border-y border-foreground/10">
+                {thisWeek.items.map((it) => (
+                  <li key={it.day + it.title} className="py-5 flex items-start gap-6">
+                    <div className="w-24 sm:w-28 flex-shrink-0">
+                      <p className="font-heading text-xl text-foreground">{it.day}</p>
+                      {it.date && (
+                        <p className="label-eyebrow text-foreground/55 mt-1">{it.date}</p>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-foreground leading-snug">{it.title}</p>
+                      {it.note && (
+                        <p className="text-sm text-foreground/65 leading-relaxed mt-1">
+                          {it.note}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -329,6 +381,59 @@ const Index = () => {
         </div>
       </section>
 
+      {/* FROM THE ARCHIVE — featured */}
+      <section className="bg-cream">
+        <div className="container py-20 lg:py-24">
+          <div className="max-w-2xl mb-12">
+            <p className="label-eyebrow mb-4">From the archive</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-medium leading-[1.1] text-balance">
+              A long memory of this corner of <span className="italic text-accent">Kilkenny</span>.
+            </h2>
+            <p className="mt-5 text-foreground/70 leading-relaxed">
+              Castlecomer's coal-mining past, the Bronze Age bracelet found in a field at
+              Firoda, the GAA grounds, the 1916 commemoration — we keep them all. Have a
+              look around.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {["coal-mining", "bracelet", "gaa-grounds"].map((slug) => {
+              const a = archiveList.find((x) => x.slug === slug)!;
+              return (
+                <Link
+                  key={slug}
+                  to={`/archive/${slug}`}
+                  className="group flex flex-col rounded-2xl border border-foreground/10 bg-cream-warm overflow-hidden hover:shadow-soft transition-shadow"
+                >
+                  <div className="aspect-[5/4] bg-cream border-b border-foreground/10" aria-hidden="true" />
+                  <div className="p-6 flex flex-col flex-1">
+                    <span className="label-eyebrow text-accent mb-2">{a.date}</span>
+                    <h3 className="font-heading italic text-2xl text-foreground leading-tight">
+                      {a.name}
+                    </h3>
+                    <p className="mt-3 text-foreground/70 text-sm leading-relaxed flex-1">
+                      {a.desc}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:text-accent transition-colors">
+                      Read <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-10">
+            <Link
+              to="/archive"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition-colors"
+            >
+              Explore the whole archive <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* PRACTICAL SCHOOL INFO */}
       <section className="bg-cream">
         <div className="container py-20 lg:py-24">
@@ -374,8 +479,14 @@ const Index = () => {
       </section>
 
       {/* FINAL CTA STRIP */}
-      <section className="bg-forest-deep">
-        <div className="container py-12 lg:py-14">
+      <section className="relative overflow-hidden bg-forest-deep">
+        <img
+          src="/firoda-crest.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none select-none absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-[320px] max-w-none opacity-[0.08]"
+        />
+        <div className="container py-12 lg:py-14 relative z-10">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <p className="font-heading text-background text-2xl md:text-3xl font-medium leading-snug max-w-2xl text-balance">
               Considering Holy Cross for your child?{" "}

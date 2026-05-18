@@ -242,3 +242,25 @@ export const achievements = [
     icon: "creative",
   },
 ];
+
+// ─────────────────────────────────────────────
+// This week at Firoda — staff-editable noticeboard
+// ─────────────────────────────────────────────
+
+export interface WeekItem {
+  day: string;
+  date?: string;
+  title: string;
+  note?: string;
+}
+
+export const thisWeek = {
+  weekOf: "Monday, 10 November 2025",
+  items: [
+    { day: "Tuesday", date: "11 Nov", title: "5th & 6th class swimming", note: "Bus leaves at 9.45 — togs & towel." },
+    { day: "Wednesday", date: "12 Nov", title: "Visit from Castlecomer Library", note: "Whole school, 11.00 in the hall." },
+    { day: "Thursday", date: "13 Nov", title: "Tin whistle (3rd & 4th)", note: "Bring your whistle." },
+    { day: "Friday", date: "14 Nov", title: "Grandparents' Day rehearsal", note: "Senior choir staying until 3.15." },
+  ],
+  lastUpdated: "Monday, 10 November 2025",
+} as const;
