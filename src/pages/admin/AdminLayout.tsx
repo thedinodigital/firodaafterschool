@@ -66,6 +66,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
           <nav className="p-4 space-y-1">
             <NavItem to="/admin" end icon={LayoutDashboard} label="Dashboard" onNav={() => setOpen(false)} />
             <NavItem to="/admin/news" icon={Newspaper} label="News" onNav={() => setOpen(false)} />
+            <NavItem to="/admin/planning" icon={LineChart} label="Planning" onNav={() => setOpen(false)} />
           </nav>
           <div className="px-4 mt-6">
             <p className="text-[10px] uppercase tracking-[0.18em] text-foreground/45 mb-2">
