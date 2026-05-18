@@ -135,6 +135,51 @@ export interface FasSettings {
   invoice_notes: string | null;
 }
 
+export interface FasVettingRecord {
+  id: string;
+  staff_id: string;
+  document_type: string;
+  issue_date: string | null;
+  expiry_date: string | null;
+  file_path: string | null;
+  file_name: string | null;
+  notes: string | null;
+  created_at: string;
+}
+
+export interface FasIncident {
+  id: string;
+  child_id: string;
+  occurred_at: string;
+  category: "minor" | "moderate" | "serious" | "behaviour" | "medical";
+  summary: string;
+  action_taken: string | null;
+  reported_by: string | null;
+  parent_notified: boolean;
+  notes: string | null;
+  created_at: string;
+}
+
+export async function fetchVettingFor(staffId: string) {
+  const { data, error } = await supabase
+    .from("fas_garda_vetting_records" as never)
+    .select("*")
+    .eq("staff_id", staffId)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as unknown as FasVettingRecord[];
+}
+
+export async function fetchIncidentsFor(childId: string) {
+  const { data, error } = await supabase
+    .from("fas_incidents" as never)
+    .select("*")
+    .eq("child_id", childId)
+    .order("occurred_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as unknown as FasIncident[];
+}
+
 // ---------- helpers ----------
 
 export const toCents = (euros: number) => Math.round(euros * 100);
