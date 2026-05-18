@@ -42,7 +42,7 @@ export default function FasRegister() {
   );
 }
 
-type FilterMode = "all" | "present" | "expected" | "collected";
+type FilterMode = "all" | "present" | "expected" | "collected" | "off";
 
 function RegisterContent() {
   const [date, setDate] = useState(todayISO());
