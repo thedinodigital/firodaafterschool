@@ -192,6 +192,9 @@ function PlanningContent({ userName }: { userName: string }) {
                   currentYear={currentYear}
                   scenario={s}
                   thresholds={thresholds}
+                  editableCurrent={{
+                    snapshots: currentSnapshotMap as Record<YearGroup, EnrolmentSnapshot | undefined>,
+                  }}
                 />
                 <ProjectionChart
                   current={currentCounts}
