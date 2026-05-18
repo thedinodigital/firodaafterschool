@@ -386,14 +386,14 @@ function CollectorPicker({
 
   const commit = async (collectorId: string | null, name: string, note?: string) => {
     const now = new Date().toISOString();
-    const payload = {
+    const payload: Record<string, unknown> = {
       collected_at: now,
       collected_by_id: collectorId,
       collected_by_name: name,
       notes: note ?? null,
-    } as never;
+    };
     if (attendanceId) {
-      const { error } = await supabase.from("fas_attendance_days" as never).update(payload).eq("id", attendanceId);
+      const { error } = await supabase.from("fas_attendance_days" as never).update(payload as never).eq("id", attendanceId);
       if (error) {
         toast.error("Couldn't record collection.");
         return;
