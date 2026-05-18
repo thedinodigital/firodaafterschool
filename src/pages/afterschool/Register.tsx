@@ -179,7 +179,7 @@ function RegisterContent() {
 
       {/* Filter chips */}
       <div className="flex flex-wrap gap-2">
-        {(["all", "present", "expected", "collected"] as FilterMode[]).map((f) => (
+        {(["all", "present", "expected", "collected", "off"] as FilterMode[]).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
@@ -190,7 +190,7 @@ function RegisterContent() {
                 : "bg-background border-foreground/15 hover:border-foreground/30"
             )}
           >
-            {f}
+            {f === "all" ? "Today" : f === "off" ? "Not scheduled" : f}
           </button>
         ))}
       </div>
