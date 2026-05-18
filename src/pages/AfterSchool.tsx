@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import {
   ArrowRight,
   CheckCircle2,
@@ -7,12 +8,6 @@ import {
   Users,
   MapPin,
   Phone,
-  Coffee,
-  BookOpen,
-  Apple,
-  Trees,
-  Home,
-  Palette,
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
@@ -36,98 +31,23 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { AfterSchoolSceneSVG } from "@/components/illustrations/SchoolhouseSVG";
+import {
+  fetchPageContent,
+  fetchGalleryImages,
+  getPagePublicUrl,
+  DEFAULT_PAGE_CONTENT,
+} from "@/lib/fasPageContent";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-
-const offerings = [
-  {
-    icon: Users,
-    title: "Supervised care from 2.30",
-    desc: "Children come straight to us when the school bell rings — no gap, no rush.",
-  },
-  {
-    icon: BookOpen,
-    title: "Homework help",
-    desc: "A quiet, focused space, with a hand to help when it's needed.",
-  },
-  {
-    icon: Apple,
-    title: "A healthy snack",
-    desc: "A simple, wholesome snack provided each afternoon.",
-  },
-  {
-    icon: Trees,
-    title: "Outdoor play",
-    desc: "Time in the school yard to run around and burn off the day.",
-  },
-  {
-    icon: Home,
-    title: "Wet-day activities",
-    desc: "Indoor games, group play and quiet corners for the soggy days.",
-  },
-  {
-    icon: Palette,
-    title: "Arts, crafts & reading",
-    desc: "Drawing, painting, building and the simple pleasure of a good book.",
-  },
-];
-
-const timeline = [
-  { time: "2.30", body: "School ends. Children come straight to After School." },
-  { time: "2.45", body: "Settle in, snack, a bit of catch-up time." },
-  { time: "3.15", body: "Homework support, for those who want it." },
-  { time: "4.00", body: "Outdoor play in the yard, or indoor activities on wet days." },
-  { time: "5.00", body: "Quiet time — reading, drawing, free play." },
-  { time: "6.00", body: "Last collection." },
-];
-
-const practicalities = [
-  { label: "Hours", value: "2.30pm – 6.00pm, term time only" },
-  { label: "Days", value: "Monday to Friday — full or selected days" },
-  { label: "Pricing", value: "[to be confirmed]" },
-  { label: "Booking", value: "In advance, via the form below" },
-  { label: "Payment", value: "[to be confirmed]" },
-  { label: "First day", value: "A short orientation visit beforehand is welcome" },
-];
-
-const afterSchoolFaqs = [
-  {
-    q: "How do children get from school to After School?",
-    a: "They walk straight in. We're in the same building — children come from their classroom to the After School room with our staff at 2.30 (or 1.50 for Junior and Senior Infants). No transfer, no second drop-off.",
-  },
-  {
-    q: "What if my child has homework — will it get done?",
-    a: "Yes. We set aside a quiet, focused window every afternoon for homework, with a member of staff on hand to help. Some parents prefer to do homework themselves at home, which is also fine — just let us know.",
-  },
-  {
-    q: "Is a snack provided?",
-    a: "Yes — a simple, healthy snack every afternoon. If your child has allergies or particular dietary needs, please flag them on the booking form and we'll work around them.",
-  },
-  {
-    q: "Can I book just two or three days a week?",
-    a: "Yes, absolutely. Many of our families book selected days only. Choose the days that suit you on the enquiry form.",
-  },
-  {
-    q: "What happens during school holidays?",
-    a: "Firoda After School operates during term time only. We do not run during the school holidays.",
-  },
-  {
-    q: "What's the latest I can collect my child?",
-    a: "Last collection is 6.00pm sharp. If you're running late, please give us a quick ring so we know.",
-  },
-  {
-    q: "Is there a waiting list?",
-    a: "Numbers are kept manageable so every child is known. If we're full when you enquire, we'll add you to a short waiting list and contact you the moment a place opens.",
-  },
-  {
-    q: "How do I cancel or change days?",
-    a: "Just give us as much notice as you can — by phone, text or email. We'll do our best to accommodate changes mid-term.",
-  },
-];
 
 const AfterSchool = () => {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
+
+  const contentQ = useQuery({ queryKey: ["fas_page_content"], queryFn: fetchPageContent });
+  const galleryQ = useQuery({ queryKey: ["fas_gallery"], queryFn: fetchGalleryImages });
+  const c = contentQ.data ?? DEFAULT_PAGE_CONTENT;
+  const gallery = galleryQ.data ?? [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -138,6 +58,8 @@ const AfterSchool = () => {
     });
   };
 
+  const heroUrl = getPagePublicUrl(c.hero.image_path);
+
   return (
     <Layout>
       <Seo
@@ -145,7 +67,7 @@ const AfterSchool = () => {
         description="Firoda After School is a warm, well-run after-school programme operating on-site at Holy Cross N.S., Firoda. 2.30pm – 6pm, term time. Junior Infants to 6th Class."
       />
 
-      {/* HERO — warmer, more domestic feel */}
+      {/* HERO */}
       <section className="relative overflow-hidden bg-cream-warm grain-overlay">
         <div
           className="absolute inset-0 pointer-events-none opacity-70"
@@ -158,36 +80,47 @@ const AfterSchool = () => {
         <div className="container relative pt-14 pb-16 lg:pt-20 lg:pb-24">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             <div className="lg:col-span-7 space-y-6 animate-fade-in-up">
-              <p className="label-eyebrow">At Holy Cross N.S., Firoda</p>
+              {c.hero.eyebrow && <p className="label-eyebrow">{c.hero.eyebrow}</p>}
 
               <h1 className="font-heading text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-[3.75rem] font-medium tracking-tight text-balance">
-                <span className="italic text-accent">Firoda After School</span> — a warm
-                welcome that lasts past 2.30.
+                {c.hero.headline_lead}
+                {c.hero.headline_italic && (
+                  <span className="italic text-accent">{c.hero.headline_italic}</span>
+                )}
+                {c.hero.headline_tail}
               </h1>
 
-              <p className="text-lg md:text-xl text-foreground/75 max-w-xl leading-relaxed">
-                On-site at Holy Cross National School, our after-school programme gives
-                children a calm, fun and well-supervised place to be while parents finish
-                the working day.
-              </p>
+              {c.hero.intro && (
+                <p className="text-lg md:text-xl text-foreground/75 max-w-xl leading-relaxed">
+                  {c.hero.intro}
+                </p>
+              )}
 
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button asChild variant="forest" size="lg">
-                  <a href="#enquire">
-                    Enquire about a place <ArrowRight className="w-4 h-4" />
-                  </a>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <a href="#offer">
-                    What we offer <ArrowRight className="w-4 h-4" />
-                  </a>
-                </Button>
+                {c.hero.primary_cta_label && (
+                  <Button asChild variant="forest" size="lg">
+                    <a href="#enquire">
+                      {c.hero.primary_cta_label} <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </Button>
+                )}
+                {c.hero.secondary_cta_label && (
+                  <Button asChild variant="outline" size="lg">
+                    <a href="#offer">
+                      {c.hero.secondary_cta_label} <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </Button>
+                )}
               </div>
             </div>
 
             <div className="lg:col-span-5 animate-fade-in-right" style={{ animationDelay: "0.15s" }}>
-              <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-elevated">
-                <AfterSchoolSceneSVG className="w-full h-auto block" />
+              <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-elevated bg-cream-warm">
+                {heroUrl ? (
+                  <img src={heroUrl} alt="Firoda After School" className="w-full h-auto block aspect-[4/3] object-cover" />
+                ) : (
+                  <AfterSchoolSceneSVG className="w-full h-auto block" />
+                )}
               </div>
             </div>
           </div>
@@ -203,13 +136,13 @@ const AfterSchool = () => {
               { label: "Ages", value: "Junior Infants → 6th", sub: "All primary years", Icon: Users },
               { label: "Location", value: "On-site", sub: "At Holy Cross N.S.", Icon: MapPin },
               { label: "Contact", value: "Get in touch", sub: "via the form below", Icon: Phone },
-            ].map((c) => (
-              <div key={c.label} className="flex items-start gap-4">
-                <c.Icon className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+            ].map((card) => (
+              <div key={card.label} className="flex items-start gap-4">
+                <card.Icon className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
                 <div>
-                  <p className="font-heading italic text-sm text-foreground/60">{c.label}</p>
-                  <p className="font-heading text-lg font-medium leading-tight mt-0.5">{c.value}</p>
-                  <p className="text-xs text-foreground/55 mt-1">{c.sub}</p>
+                  <p className="font-heading italic text-sm text-foreground/60">{card.label}</p>
+                  <p className="font-heading text-lg font-medium leading-tight mt-0.5">{card.value}</p>
+                  <p className="text-xs text-foreground/55 mt-1">{card.sub}</p>
                 </div>
               </div>
             ))}
@@ -221,25 +154,23 @@ const AfterSchool = () => {
       <section id="offer" className="bg-cream">
         <div className="container py-20 lg:py-24">
           <div className="max-w-2xl mb-12">
-            <p className="label-eyebrow mb-4">What we offer</p>
+            {c.offer.eyebrow && <p className="label-eyebrow mb-4">{c.offer.eyebrow}</p>}
             <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
-              A <span className="italic text-accent">gentle</span> end to the school day.
+              {c.offer.heading_lead}
+              {c.offer.heading_italic && <span className="italic text-accent">{c.offer.heading_italic}</span>}
+              {c.offer.heading_tail}
             </h2>
-            <p className="mt-5 text-lg text-foreground/70 leading-relaxed">
-              The afternoon is a balance of supervision, play, food and a little quiet —
-              shaped around what the children actually need after a full day of school.
-            </p>
+            {c.offer.intro && (
+              <p className="mt-5 text-lg text-foreground/70 leading-relaxed">{c.offer.intro}</p>
+            )}
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {offerings.map((o) => (
+            {c.offer.items.map((o, i) => (
               <div
-                key={o.title}
+                key={i}
                 className="rounded-2xl border border-foreground/10 bg-cream-warm/50 p-7 hover:bg-cream-warm transition-colors"
               >
-                <div className="w-11 h-11 rounded-full bg-background border border-foreground/10 flex items-center justify-center mb-5">
-                  <o.icon className="w-5 h-5 text-accent" />
-                </div>
                 <h3 className="font-heading text-xl font-medium mb-2">{o.title}</h3>
                 <p className="text-sm text-foreground/70 leading-relaxed">{o.desc}</p>
               </div>
@@ -253,25 +184,22 @@ const AfterSchool = () => {
         <div className="container py-20 lg:py-24">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4">
-              <p className="label-eyebrow mb-4">A typical afternoon</p>
+              {c.timeline.eyebrow && <p className="label-eyebrow mb-4">{c.timeline.eyebrow}</p>}
               <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
-                What an afternoon{" "}
-                <span className="italic text-accent">looks like</span>.
+                {c.timeline.heading_lead}
+                {c.timeline.heading_italic && <span className="italic text-accent">{c.timeline.heading_italic}</span>}.
               </h2>
-              <p className="mt-6 text-foreground/70 leading-relaxed">
-                Things shift gently from day to day — but here's the rhythm most
-                afternoons follow.
-              </p>
+              {c.timeline.intro && (
+                <p className="mt-6 text-foreground/70 leading-relaxed">{c.timeline.intro}</p>
+              )}
             </div>
 
             <div className="lg:col-span-8">
               <ol className="relative border-l border-foreground/15 ml-3">
-                {timeline.map((t) => (
-                  <li key={t.time} className="pl-8 pb-8 relative last:pb-0">
+                {c.timeline.items.map((t, i) => (
+                  <li key={i} className="pl-8 pb-8 relative last:pb-0">
                     <span className="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-accent border-2 border-cream-warm" />
-                    <p className="font-heading italic text-2xl font-medium text-accent leading-none">
-                      {t.time}
-                    </p>
+                    <p className="font-heading italic text-2xl font-medium text-accent leading-none">{t.time}</p>
                     <p className="mt-2 text-foreground/80 leading-relaxed">{t.body}</p>
                   </li>
                 ))}
@@ -281,70 +209,79 @@ const AfterSchool = () => {
         </div>
       </section>
 
-      {/* WHY FAMILIES CHOOSE US — DARK */}
+      {/* WHY FAMILIES CHOOSE US */}
       <section className="bg-forest-deep grain-overlay">
         <div className="container py-20 lg:py-24">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="label-eyebrow-cream mb-4">Why families choose us</p>
+            {c.why.eyebrow && <p className="label-eyebrow-cream mb-4">{c.why.eyebrow}</p>}
             <h2 className="font-heading text-background text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
-              <span className="italic text-accent-soft">Familiar</span> faces,{" "}
-              <span className="italic text-accent-soft">familiar</span> place.
+              {c.why.heading_lead}
+              {c.why.heading_italic && <span className="italic text-accent-soft">{c.why.heading_italic}</span>}
+              {c.why.heading_tail}
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-10 lg:gap-12">
-            {[
-              {
-                title: "Right here at the school",
-                body:
-                  "No second pickup, no rush across town. Children walk straight in to the same building they spent their day in.",
-                Icon: MapPin,
-              },
-              {
-                title: "A small, settled group",
-                body:
-                  "We keep numbers manageable so every child is known by name — not just supervised in a crowd.",
-                Icon: Users,
-              },
-              {
-                title: "Calm and unhurried",
-                body:
-                  "After a full school day, children need space to decompress — not another structured timetable. We keep it gentle.",
-                Icon: Coffee,
-              },
-            ].map((c) => (
-              <div key={c.title} className="text-center md:text-left">
-                <div className="w-14 h-14 rounded-full border border-background/30 flex items-center justify-center mx-auto md:mx-0 mb-5">
-                  <c.Icon className="w-6 h-6 text-accent-soft" />
-                </div>
-                <h3 className="font-heading text-background text-xl font-medium mb-3">
-                  {c.title}
-                </h3>
-                <p className="text-background/75 leading-relaxed">{c.body}</p>
+            {c.why.items.map((card, i) => (
+              <div key={i} className="text-center md:text-left">
+                <h3 className="font-heading text-background text-xl font-medium mb-3">{card.title}</h3>
+                <p className="text-background/75 leading-relaxed">{card.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* GALLERY */}
+      {gallery.length > 0 && (
+        <section className="bg-cream-warm">
+          <div className="container py-20 lg:py-24">
+            <div className="max-w-2xl mb-12">
+              {c.gallery.eyebrow && <p className="label-eyebrow mb-4">{c.gallery.eyebrow}</p>}
+              <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
+                {c.gallery.heading_lead}
+                {c.gallery.heading_italic && <span className="italic text-accent">{c.gallery.heading_italic}</span>}.
+              </h2>
+              {c.gallery.intro && (
+                <p className="mt-5 text-lg text-foreground/70 leading-relaxed">{c.gallery.intro}</p>
+              )}
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {gallery.map((img) => {
+                const url = getPagePublicUrl(img.file_path);
+                if (!url) return null;
+                return (
+                  <figure key={img.id} className="rounded-2xl overflow-hidden border border-foreground/10 bg-background">
+                    <img src={url} alt={img.caption ?? ""} loading="lazy" className="w-full aspect-[4/3] object-cover" />
+                    {img.caption && (
+                      <figcaption className="px-4 py-3 text-sm text-foreground/70 italic">{img.caption}</figcaption>
+                    )}
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* PRACTICALITIES */}
       <section className="bg-cream">
         <div className="container py-20 lg:py-24">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4">
-              <p className="label-eyebrow mb-4">Practical details</p>
+              {c.practicalities.eyebrow && <p className="label-eyebrow mb-4">{c.practicalities.eyebrow}</p>}
               <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
-                <span className="italic text-accent">The practical stuff.</span>
+                <span className="italic text-accent">{c.practicalities.heading}</span>
               </h2>
-              <p className="mt-6 text-foreground/70 leading-relaxed">
-                The bits parents tend to want up-front. Anything missing? Drop us a line.
-              </p>
+              {c.practicalities.intro && (
+                <p className="mt-6 text-foreground/70 leading-relaxed">{c.practicalities.intro}</p>
+              )}
             </div>
 
             <div className="lg:col-span-8">
               <dl className="divide-y divide-foreground/10 border-y border-foreground/10">
-                {practicalities.map((p) => (
-                  <div key={p.label} className="py-5 grid sm:grid-cols-3 gap-4">
+                {c.practicalities.items.map((p, i) => (
+                  <div key={i} className="py-5 grid sm:grid-cols-3 gap-4">
                     <dt className="font-heading italic text-foreground/60">{p.label}</dt>
                     <dd className="sm:col-span-2 text-foreground/85">{p.value}</dd>
                   </div>
@@ -375,8 +312,7 @@ const AfterSchool = () => {
                     Thanks — we'll be in touch within a few days.
                   </h3>
                   <p className="text-foreground/70 mt-3">
-                    If it's urgent, do feel free to ring the school office and they'll
-                    pass a message on.
+                    If it's urgent, do feel free to ring the school office and they'll pass a message on.
                   </p>
                 </div>
               ) : (
@@ -458,24 +394,21 @@ const AfterSchool = () => {
         <div className="container py-20 lg:py-24">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4">
-              <p className="label-eyebrow mb-4">After School FAQ</p>
+              {c.faqs.eyebrow && <p className="label-eyebrow mb-4">{c.faqs.eyebrow}</p>}
               <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
-                The questions{" "}
-                <span className="italic text-accent">parents ask</span>.
+                {c.faqs.heading_lead}
+                {c.faqs.heading_italic && <span className="italic text-accent">{c.faqs.heading_italic}</span>}.
               </h2>
-              <p className="mt-6 text-foreground/70 leading-relaxed">
-                Still have a question?{" "}
-                <a href="#enquire" className="text-accent underline-offset-4 hover:underline">
-                  Drop us a line →
-                </a>
-              </p>
+              {c.faqs.intro && (
+                <p className="mt-6 text-foreground/70 leading-relaxed">{c.faqs.intro}</p>
+              )}
             </div>
 
             <div className="lg:col-span-8">
               <Accordion type="single" collapsible defaultValue="item-0" className="space-y-2">
-                {afterSchoolFaqs.map((f, i) => (
+                {c.faqs.items.map((f, i) => (
                   <AccordionItem
-                    key={f.q}
+                    key={i}
                     value={`item-${i}`}
                     className="border border-foreground/10 rounded-xl bg-cream-warm/40 px-5"
                   >
@@ -496,32 +429,36 @@ const AfterSchool = () => {
       {/* CLOSING CTA */}
       <section className="bg-cream-warm">
         <div className="container py-24 lg:py-28 text-center">
-          <p className="label-eyebrow mb-5 divider-dot inline-block">Have a look around</p>
+          {c.closing.eyebrow && (
+            <p className="label-eyebrow mb-5 divider-dot inline-block">{c.closing.eyebrow}</p>
+          )}
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.05] max-w-3xl mx-auto text-balance">
-            Questions?{" "}
-            <span className="italic text-accent">Come and have a look.</span>
+            {c.closing.heading_lead}
+            {c.closing.heading_italic && <span className="italic text-accent">{c.closing.heading_italic}</span>}
           </h2>
-          <p className="mt-6 text-lg text-foreground/70 max-w-xl mx-auto leading-relaxed">
-            We're happy to show you around — get in touch and we'll arrange a visit.
-          </p>
-          <div className="mt-9">
-            <Button asChild variant="forest" size="lg">
-              <a href="#enquire">
-                Enquire now <ArrowRight className="w-4 h-4" />
-              </a>
-            </Button>
-          </div>
+          {c.closing.intro && (
+            <p className="mt-6 text-lg text-foreground/70 max-w-xl mx-auto leading-relaxed">{c.closing.intro}</p>
+          )}
+          {c.closing.cta_label && (
+            <div className="mt-9">
+              <Button asChild variant="forest" size="lg">
+                <a href="#enquire">
+                  {c.closing.cta_label} <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* PAGE FOOTER NOTE — single, quiet disclosure */}
+      {/* PAGE FOOTER NOTE */}
       <section className="bg-cream">
         <div className="container py-10 text-center max-w-2xl">
           <p className="text-xs text-foreground/55 leading-relaxed">
             Firoda After School is operated as a separate business at Holy Cross N.S.,
             Firoda. For school enquiries, please visit the{" "}
             <Link to="/" className="underline underline-offset-2 hover:text-accent">
-            school home page
+              school home page
             </Link>
             .
           </p>
