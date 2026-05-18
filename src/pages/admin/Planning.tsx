@@ -125,10 +125,8 @@ function PlanningContent({ userName }: { userName: string }) {
   const currentRow = projection[0];
   const currentRisk = currentRow ? riskFor(currentRow.total, currentRow.band, thresholds) : "green";
 
-  const lastUpdated = snapshots
-    .map((s) => s.updated_at)
-    .sort()
-    .at(-1);
+  const sortedDates = snapshots.map((s) => s.updated_at).sort();
+  const lastUpdated = sortedDates[sortedDates.length - 1];
 
   const isSeedData = snapshots.every((s) => !s.updated_by);
 
