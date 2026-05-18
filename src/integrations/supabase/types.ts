@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      enrolment_snapshots: {
+        Row: {
+          academic_year: string
+          count: number
+          id: string
+          is_current: boolean
+          notes: string | null
+          updated_at: string
+          updated_by: string | null
+          year_group: Database["public"]["Enums"]["year_group"]
+        }
+        Insert: {
+          academic_year: string
+          count: number
+          id?: string
+          is_current?: boolean
+          notes?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          year_group: Database["public"]["Enums"]["year_group"]
+        }
+        Update: {
+          academic_year?: string
+          count?: number
+          id?: string
+          is_current?: boolean
+          notes?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          year_group?: Database["public"]["Enums"]["year_group"]
+        }
+        Relationships: []
+      }
       news_posts: {
         Row: {
           body: string
@@ -62,6 +95,42 @@ export type Database = {
         }
         Relationships: []
       }
+      projection_scenarios: {
+        Row: {
+          adjustments: Json
+          created_at: string
+          description: string | null
+          id: string
+          is_baseline: boolean
+          ji_intake: Json
+          name: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          adjustments?: Json
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_baseline?: boolean
+          ji_intake?: Json
+          name: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          adjustments?: Json
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_baseline?: boolean
+          ji_intake?: Json
+          name?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       staff_profiles: {
         Row: {
           created_at: string
@@ -83,6 +152,33 @@ export type Database = {
         }
         Relationships: []
       }
+      staffing_thresholds: {
+        Row: {
+          appointment_min: number
+          config_label: string
+          id: number
+          retention_min: number
+          school_type: string
+          total_teachers: number
+        }
+        Insert: {
+          appointment_min: number
+          config_label: string
+          id?: number
+          retention_min: number
+          school_type?: string
+          total_teachers: number
+        }
+        Update: {
+          appointment_min?: number
+          config_label?: string
+          id?: number
+          retention_min?: number
+          school_type?: string
+          total_teachers?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -92,7 +188,15 @@ export type Database = {
       is_staff: { Args: { _uid: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      year_group:
+        | "junior_infants"
+        | "senior_infants"
+        | "first"
+        | "second"
+        | "third"
+        | "fourth"
+        | "fifth"
+        | "sixth"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -219,6 +323,17 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      year_group: [
+        "junior_infants",
+        "senior_infants",
+        "first",
+        "second",
+        "third",
+        "fourth",
+        "fifth",
+        "sixth",
+      ],
+    },
   },
 } as const
