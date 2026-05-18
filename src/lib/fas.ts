@@ -34,6 +34,17 @@ export const YEAR_GROUP_ORDER: Record<FasYearGroup, number> = {
   sixth: 7,
 };
 
+export type Weekday = "mon" | "tue" | "wed" | "thu" | "fri";
+export const WEEKDAYS: Weekday[] = ["mon", "tue", "wed", "thu", "fri"];
+export const WEEKDAY_LABELS: Record<Weekday, string> = {
+  mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri",
+};
+// JS getDay(): Sun=0, Mon=1, ... Sat=6
+export function weekdayFromISO(iso: string): Weekday | null {
+  const d = new Date(iso + "T12:00:00").getDay();
+  return ([null, "mon", "tue", "wed", "thu", "fri", null] as (Weekday | null)[])[d];
+}
+
 export interface FasChild {
   id: string;
   first_name: string;
@@ -44,6 +55,7 @@ export interface FasChild {
   active: boolean;
   enrolled_at: string;
   notes: string | null;
+  expected_days: Weekday[];
 }
 
 export interface FasGuardian {
