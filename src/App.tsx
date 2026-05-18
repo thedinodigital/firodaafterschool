@@ -65,6 +65,8 @@ const FasInvoices = lazy(() => import("./pages/afterschool/Invoices"));
 const FasInvoiceNew = lazy(() => import("./pages/afterschool/InvoiceNew"));
 const FasInvoiceDetail = lazy(() => import("./pages/afterschool/InvoiceDetail"));
 const FasSettings = lazy(() => import("./pages/afterschool/Settings"));
+const FasPageEditor = lazy(() => import("./pages/afterschool/PageEditor"));
+const FasGallery = lazy(() => import("./pages/afterschool/Gallery"));
 
 import { AuthProvider } from "./hooks/useAuth";
 import { RequireAuth } from "./pages/admin/RequireAuth";
@@ -146,6 +148,8 @@ const App = () => (
               <Route path="/afterschool-admin/invoices/new" element={<FasInvoiceNew />} />
               <Route path="/afterschool-admin/invoices/:id" element={<FasInvoiceDetail />} />
               <Route path="/afterschool-admin/settings" element={<FasSettings />} />
+              <Route path="/afterschool-admin/page" element={<FasPageEditor />} />
+              <Route path="/afterschool-admin/gallery" element={<FasGallery />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
