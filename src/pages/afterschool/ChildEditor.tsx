@@ -151,15 +151,11 @@ function ChildEditorContent() {
   };
 
   const deleteChild = async () => {
-    // Cascade-clean child-owned rows first (no FK cascade in schema)
-    await supabase.from("fas_incidents" as never).delete().eq("child_id", id!);
-    await supabase.from("fas_billing_arrangements" as never).delete().eq("child_id", id!);
-    await supabase.from("fas_collectors" as never).delete().eq("child_id", id!);
-    await supabase.from("fas_guardians" as never).delete().eq("child_id", id!);
-    await supabase.from("fas_attendance_days" as never).delete().eq("child_id", id!);
-    const { error } = await supabase.from("fas_children" as never).delete().eq("id", id!);
-    if (error) return toast.error("Couldn't delete. Try again.");
+    const { error } = await supabase.rpc("fas_delete_child" as never, { _child_id: id! } as never);
+    if (error) return toast.error(error.message || "Couldn't delete. Try again.");
     toast.success("Child record permanently deleted.");
+    qc.invalidateQueries({ queryKey: ["fas_children_all"] });
+    qc.invalidateQueries({ queryKey: ["fas_children_active"] });
     navigate("/afterschool-admin/children");
   };
 
