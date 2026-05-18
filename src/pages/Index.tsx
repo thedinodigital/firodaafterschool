@@ -115,13 +115,12 @@ const Index = () => {
               </div>
 
               <h1 className="font-heading text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl font-medium tracking-tight text-balance">
-                A small rural school with a{" "}
-                <span className="italic text-accent">big heart</span>, since 1962.
+                Where every child is known{" "}
+                <span className="italic text-accent">by name</span>.
               </h1>
 
               <p className="text-lg text-foreground/70 max-w-xl leading-relaxed text-pretty">
-                Holy Cross National School sits between Castlecomer and Ballinakill — a calm,
-                welcoming primary school where every child is known by name.
+                Holy Cross National School, Firoda — a small primary school between Castlecomer and Ballinakill, in north Kilkenny. Since 1962.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
