@@ -51,6 +51,8 @@ const AdminLogin = lazy(() => import("./pages/admin/Login"));
 const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
 const AdminNewsList = lazy(() => import("./pages/admin/NewsList"));
 const AdminNewsEditor = lazy(() => import("./pages/admin/NewsEditor"));
+const AdminPlanning = lazy(() => import("./pages/admin/Planning"));
+const AdminPlanningAppeal = lazy(() => import("./pages/admin/PlanningAppeal"));
 import { AuthProvider } from "./hooks/useAuth";
 import { RequireAuth } from "./pages/admin/RequireAuth";
 
