@@ -689,6 +689,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      fas_delete_child: { Args: { _child_id: string }; Returns: undefined }
       is_admin: { Args: { _uid: string }; Returns: boolean }
       is_fas_owner: { Args: { _uid: string }; Returns: boolean }
       is_staff: { Args: { _uid: string }; Returns: boolean }
