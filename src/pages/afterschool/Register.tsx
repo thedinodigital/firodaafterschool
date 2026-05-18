@@ -100,10 +100,14 @@ function RegisterContent() {
     [children]
   );
 
+  const todayWeekday = weekdayFromISO(date);
   const filtered = sorted.filter((c) => {
     const a = attendance.find((x) => x.child_id === c.id);
-    const state = !a || !a.arrived_at ? "expected" : a.collected_at ? "collected" : "present";
-    if (filter === "all") return true;
+    const scheduled = todayWeekday ? (c.expected_days ?? []).includes(todayWeekday) : false;
+    let state: "present" | "collected" | "expected" | "off";
+    if (a?.arrived_at) state = a.collected_at ? "collected" : "present";
+    else state = scheduled ? "expected" : "off";
+    if (filter === "all") return state !== "off";
     return state === filter;
   });
 
