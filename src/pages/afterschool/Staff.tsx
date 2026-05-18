@@ -28,6 +28,7 @@ function StaffContent() {
   const shiftsQ = useQuery({ queryKey: ["fas_shifts", today], queryFn: () => fetchShiftsForDate(today) });
   const [showAdd, setShowAdd] = useState(false);
   const [editing, setEditing] = useState<FasStaff | null>(null);
+  const [vettingOpenFor, setVettingOpenFor] = useState<string | null>(null);
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["fas_staff_all"] });
 
@@ -66,22 +67,35 @@ function StaffContent() {
                 const vetting = s.garda_vetting_renewal_date ? new Date(s.garda_vetting_renewal_date) : null;
                 const daysToRenewal = vetting ? Math.ceil((vetting.getTime() - Date.now()) / (24 * 3600 * 1000)) : null;
                 const vettingClass = daysToRenewal === null ? "text-foreground/40" : daysToRenewal < 0 ? "text-red-700" : daysToRenewal < 60 ? "text-amber-700" : "text-foreground/65";
+                const isOpen = vettingOpenFor === s.id;
                 return (
-                  <tr key={s.id} className={cn(!s.active && "opacity-50")}>
-                    <td className="px-4 py-3 font-medium">{s.first_name} {s.last_name}</td>
-                    <td className="px-4 py-3 text-foreground/70">{s.role_title}</td>
-                    <td className={cn("px-4 py-3 text-xs", vettingClass)}>
-                      {vetting ? vetting.toLocaleDateString("en-IE") : "—"}
-                      {daysToRenewal !== null && daysToRenewal < 0 && " (past due)"}
-                      {daysToRenewal !== null && daysToRenewal >= 0 && daysToRenewal < 60 && ` (${daysToRenewal}d)`}
-                    </td>
-                    <td className="px-4 py-3 text-xs">
-                      {shift ? (shift.end_at ? `In and out` : `On shift since ${new Date(shift.start_at).toLocaleTimeString("en-IE", { hour: "2-digit", minute: "2-digit" })}`) : <span className="text-foreground/40">Not in</span>}
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <Button size="sm" variant="ghost" onClick={() => { setEditing(s); setShowAdd(false); }}>Edit</Button>
-                    </td>
-                  </tr>
+                  <>
+                    <tr key={s.id} className={cn(!s.active && "opacity-50")}>
+                      <td className="px-4 py-3 font-medium">{s.first_name} {s.last_name}</td>
+                      <td className="px-4 py-3 text-foreground/70">{s.role_title}</td>
+                      <td className={cn("px-4 py-3 text-xs", vettingClass)}>
+                        {vetting ? vetting.toLocaleDateString("en-IE") : "—"}
+                        {daysToRenewal !== null && daysToRenewal < 0 && " (past due)"}
+                        {daysToRenewal !== null && daysToRenewal >= 0 && daysToRenewal < 60 && ` (${daysToRenewal}d)`}
+                      </td>
+                      <td className="px-4 py-3 text-xs">
+                        {shift ? (shift.end_at ? `In and out` : `On shift since ${new Date(shift.start_at).toLocaleTimeString("en-IE", { hour: "2-digit", minute: "2-digit" })}`) : <span className="text-foreground/40">Not in</span>}
+                      </td>
+                      <td className="px-4 py-3 text-right whitespace-nowrap">
+                        <Button size="sm" variant="ghost" onClick={() => setVettingOpenFor(isOpen ? null : s.id)}>
+                          <FileText className="w-4 h-4 mr-1" />{isOpen ? "Close" : "Records"}
+                        </Button>
+                        <Button size="sm" variant="ghost" onClick={() => { setEditing(s); setShowAdd(false); }}>Edit</Button>
+                      </td>
+                    </tr>
+                    {isOpen && (
+                      <tr>
+                        <td colSpan={5} className="px-4 py-4 bg-foreground/[0.02]">
+                          <VettingPanel staffId={s.id} staffName={`${s.first_name} ${s.last_name}`} />
+                        </td>
+                      </tr>
+                    )}
+                  </>
                 );
               })}
             </tbody>
