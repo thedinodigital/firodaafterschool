@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, FileText, Upload, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { FasLayout, RequireFasOwner } from "./FasLayout";
-import { fetchAllStaff, fetchShiftsForDate, todayISO, FasStaff } from "@/lib/fas";
+import { fetchAllStaff, fetchShiftsForDate, fetchVettingFor, todayISO, FasStaff, FasVettingRecord } from "@/lib/fas";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 export default function FasStaffPage() {
