@@ -117,6 +117,8 @@ const App = () => (
               <Route path="/admin/news" element={<RequireAuth><AdminNewsList /></RequireAuth>} />
               <Route path="/admin/news/new" element={<RequireAuth><AdminNewsEditor /></RequireAuth>} />
               <Route path="/admin/news/:id/edit" element={<RequireAuth><AdminNewsEditor /></RequireAuth>} />
+              <Route path="/admin/planning" element={<RequireAuth><AdminPlanning /></RequireAuth>} />
+              <Route path="/admin/planning/appeal" element={<RequireAuth><AdminPlanningAppeal /></RequireAuth>} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
