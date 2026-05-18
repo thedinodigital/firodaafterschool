@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link, NavLink, Navigate, useLocation } from "react-router-dom";
-import { Home, ClipboardList, Users, UserCog, FileText, Settings, LogOut, Menu } from "lucide-react";
+import { Home, ClipboardList, Users, UserCog, FileText, Settings, LogOut, Menu, FileEdit, Image } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -12,6 +12,8 @@ const NAV = [
   { to: "/afterschool-admin/children", label: "Children", icon: Users },
   { to: "/afterschool-admin/staff", label: "Staff", icon: UserCog },
   { to: "/afterschool-admin/invoices", label: "Invoices", icon: FileText },
+  { to: "/afterschool-admin/page", label: "Website content", icon: FileEdit },
+  { to: "/afterschool-admin/gallery", label: "Photo gallery", icon: Image },
   { to: "/afterschool-admin/settings", label: "Settings", icon: Settings },
 ];
 
