@@ -96,7 +96,13 @@ const Archive = () => (
 
                   <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 pl-12 lg:pl-0">
                     {/* text */}
-                    <div className={`lg:col-start-${isLeft ? 1 : 2} lg:row-start-1 lg:pr-12 ${!isLeft ? "lg:pl-12 lg:pr-0" : ""}`}>
+                    <div
+                      className={
+                        isLeft
+                          ? "lg:col-start-1 lg:row-start-1 lg:pr-12 lg:text-right"
+                          : "lg:col-start-2 lg:row-start-1 lg:pl-12"
+                      }
+                    >
                       <span className="inline-block label-eyebrow text-accent mb-3">{a.date}</span>
                       <h3 className="font-heading italic text-3xl md:text-4xl text-foreground leading-tight">
                         {a.name}
@@ -106,14 +112,22 @@ const Archive = () => (
                       </p>
                       <Link
                         to={`/archive/${a.slug}`}
-                        className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition-colors"
+                        className={`mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition-colors ${
+                          isLeft ? "lg:flex-row-reverse" : ""
+                        }`}
                       >
                         Read the chapter <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
 
                     {/* image placeholder */}
-                    <div className={`lg:col-start-${isLeft ? 2 : 1} lg:row-start-1 ${!isLeft ? "lg:pr-12" : "lg:pl-12"}`}>
+                    <div
+                      className={
+                        isLeft
+                          ? "lg:col-start-2 lg:row-start-1 lg:pl-12"
+                          : "lg:col-start-1 lg:row-start-1 lg:pr-12"
+                      }
+                    >
                       <div className="aspect-[5/4] rounded-2xl bg-cream-warm border border-foreground/10 flex items-center justify-center">
                         <Icon className="w-14 h-14 text-foreground/25" strokeWidth={1.25} aria-hidden="true" />
                       </div>
