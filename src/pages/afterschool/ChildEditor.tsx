@@ -253,6 +253,25 @@ function ChildEditorContent() {
             </AlertDialogContent>
           </AlertDialog>
         )}
+        {!isNew && (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="ghost" className="text-red-700 ml-auto">Delete permanently</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Delete {draft.first_name} {draft.last_name}?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This permanently removes the child and all linked guardians, collectors, billing, attendance and incident records. This cannot be undone. If you only want to stop their enrolment, use "Mark as inactive" instead.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={deleteChild} className="bg-red-700 hover:bg-red-800">Delete forever</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
       </div>
 
       {!isNew && id && (
@@ -260,6 +279,7 @@ function ChildEditorContent() {
           <GuardiansSection childId={id} />
           <CollectorsSection childId={id} />
           <BillingSection childId={id} />
+          <IncidentsSection childId={id} childName={draft.first_name ?? ""} />
           <AttendancePreview childId={id} />
           <InvoicePreview childId={id} />
         </>
