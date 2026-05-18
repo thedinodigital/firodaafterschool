@@ -162,7 +162,7 @@ const Index = () => {
           src="/firoda-crest.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] max-w-none opacity-[0.05] -z-0 motion-safe:animate-fade-in"
+          className="pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] max-w-[640px] opacity-[0.04] sm:opacity-[0.05] -z-0 motion-safe:animate-fade-in"
         />
         <div className="container py-20 lg:py-28 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
