@@ -4,7 +4,7 @@ import { Download, FileText } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { FasLayout, RequireFasOwner } from "./FasLayout";
-import { fetchSettings, type FasSettings as FasSettingsType } from "@/lib/fas";
+import { fetchSettings, type FasSettings } from "@/lib/fas";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
