@@ -76,6 +76,7 @@ function ChildEditorContent() {
     school_year_group: "junior_infants",
     allergies_and_medical: "",
     active: true,
+    expected_days: [],
   });
   const [savingChild, setSavingChild] = useState(false);
 
@@ -88,9 +89,18 @@ function ChildEditorContent() {
         school_year_group: childQ.data.school_year_group,
         allergies_and_medical: childQ.data.allergies_and_medical ?? "",
         active: childQ.data.active,
+        expected_days: childQ.data.expected_days ?? [],
       });
     }
   }, [childQ.data]);
+
+  const toggleDay = (d: Weekday) => {
+    const current = draft.expected_days ?? [];
+    setDraft({
+      ...draft,
+      expected_days: current.includes(d) ? current.filter((x) => x !== d) : [...current, d],
+    });
+  };
 
   // Quick first-guardian capture for new child flow
   const [g1, setG1] = useState({ full_name: "", relationship: "Mother", phone_primary: "" });
