@@ -14,13 +14,82 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      news_posts: {
+        Row: {
+          body: string
+          category: string
+          created_at: string
+          date: string
+          excerpt: string
+          feature: boolean
+          id: string
+          illustration: string | null
+          published: boolean
+          slug: string
+          title: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          body: string
+          category: string
+          created_at?: string
+          date: string
+          excerpt: string
+          feature?: boolean
+          id?: string
+          illustration?: string | null
+          published?: boolean
+          slug: string
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          body?: string
+          category?: string
+          created_at?: string
+          date?: string
+          excerpt?: string
+          feature?: boolean
+          id?: string
+          illustration?: string | null
+          published?: boolean
+          slug?: string
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      staff_profiles: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          role: string
+        }
+        Insert: {
+          created_at?: string
+          full_name: string
+          id: string
+          role?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          role?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: { _uid: string }; Returns: boolean }
+      is_staff: { Args: { _uid: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
