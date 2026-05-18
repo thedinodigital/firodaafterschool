@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Zap, Clock, Pencil } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
 import { JsonLd, SITE_URL } from "@/components/JsonLd";
 import { Button } from "@/components/ui/button";
-import { newsItems, upcomingEvents, achievements, thisWeek } from "@/data/content";
+import { upcomingEvents, achievements, thisWeek } from "@/data/content";
+import { fetchPublishedNews } from "@/lib/news";
 import { archiveList } from "./archive/Archive";
 import heroChildren from "@/assets/hero-children.jpg";
 import schoolExterior from "@/assets/school-exterior.jpg";
@@ -19,9 +21,10 @@ const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-IE", { day: "numeric", month: "long", year: "numeric" });
 
 const Index = () => {
-  const recentNews = [...newsItems]
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
-    .slice(0, 5);
+  const { data: recentNews = [], isLoading: newsLoading, isError: newsError } = useQuery({
+    queryKey: ["news", "recent"],
+    queryFn: () => fetchPublishedNews(5),
+  });
 
   const schoolJsonLd = {
     "@context": "https://schema.org",
