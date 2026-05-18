@@ -91,7 +91,7 @@ export default function AdminNewsList() {
                         "px-2 py-1 rounded-full",
                         p.published
                           ? "bg-primary/10 text-primary"
-                          : "bg-gold/15 text-gold-dark"
+                          : "bg-gold/15 text-foreground"
                       )}
                     >
                       {p.published ? "Published" : "Draft"}
