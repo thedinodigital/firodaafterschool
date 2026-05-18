@@ -14,6 +14,9 @@ import {
   FasCollector,
   FasBilling,
   FasIncident,
+  WEEKDAYS,
+  WEEKDAY_LABELS,
+  Weekday,
   fetchGuardiansFor,
   fetchCollectorsFor,
   fetchBillingFor,
@@ -73,6 +76,7 @@ function ChildEditorContent() {
     school_year_group: "junior_infants",
     allergies_and_medical: "",
     active: true,
+    expected_days: [],
   });
   const [savingChild, setSavingChild] = useState(false);
 
@@ -85,9 +89,18 @@ function ChildEditorContent() {
         school_year_group: childQ.data.school_year_group,
         allergies_and_medical: childQ.data.allergies_and_medical ?? "",
         active: childQ.data.active,
+        expected_days: childQ.data.expected_days ?? [],
       });
     }
   }, [childQ.data]);
+
+  const toggleDay = (d: Weekday) => {
+    const current = draft.expected_days ?? [];
+    setDraft({
+      ...draft,
+      expected_days: current.includes(d) ? current.filter((x) => x !== d) : [...current, d],
+    });
+  };
 
   // Quick first-guardian capture for new child flow
   const [g1, setG1] = useState({ full_name: "", relationship: "Mother", phone_primary: "" });
@@ -206,6 +219,35 @@ function ChildEditorContent() {
           value={draft.allergies_and_medical ?? ""}
           onChange={(e) => setDraft({ ...draft, allergies_and_medical: e.target.value })}
         />
+      </Card>
+
+      {/* Expected days */}
+      <Card title="Expected days">
+        <p className="text-sm text-foreground/60 mb-3">
+          Which weekdays is {draft.first_name || "this child"} normally booked to attend? This drives the register's "expected today" list.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {WEEKDAYS.map((d) => {
+            const on = (draft.expected_days ?? []).includes(d);
+            return (
+              <button
+                key={d}
+                type="button"
+                onClick={() => toggleDay(d)}
+                className={`px-4 py-2 rounded-full border text-sm min-h-[40px] transition ${
+                  on
+                    ? "bg-accent text-accent-foreground border-accent"
+                    : "bg-background border-foreground/15 hover:border-foreground/30"
+                }`}
+              >
+                {WEEKDAY_LABELS[d]}
+              </button>
+            );
+          })}
+        </div>
+        {(draft.expected_days ?? []).length === 0 && (
+          <p className="text-xs text-foreground/55 mt-3">No days selected — child won't appear under "expected" on the register.</p>
+        )}
       </Card>
 
       {/* First guardian (only when creating) */}

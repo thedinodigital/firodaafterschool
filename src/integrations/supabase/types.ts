@@ -146,6 +146,7 @@ export type Database = {
           created_at: string
           date_of_birth: string
           enrolled_at: string
+          expected_days: string[]
           first_name: string
           id: string
           last_name: string
@@ -159,6 +160,7 @@ export type Database = {
           created_at?: string
           date_of_birth: string
           enrolled_at?: string
+          expected_days?: string[]
           first_name: string
           id?: string
           last_name: string
@@ -172,6 +174,7 @@ export type Database = {
           created_at?: string
           date_of_birth?: string
           enrolled_at?: string
+          expected_days?: string[]
           first_name?: string
           id?: string
           last_name?: string

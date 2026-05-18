@@ -15,6 +15,7 @@ import {
   fetchShiftsForDate,
   ratioStatus,
   todayISO,
+  weekdayFromISO,
   YEAR_GROUP_LABELS,
   YEAR_GROUP_ORDER,
 } from "@/lib/fas";
@@ -41,7 +42,7 @@ export default function FasRegister() {
   );
 }
 
-type FilterMode = "all" | "present" | "expected" | "collected";
+type FilterMode = "all" | "present" | "expected" | "collected" | "off";
 
 function RegisterContent() {
   const [date, setDate] = useState(todayISO());
@@ -99,10 +100,14 @@ function RegisterContent() {
     [children]
   );
 
+  const todayWeekday = weekdayFromISO(date);
   const filtered = sorted.filter((c) => {
     const a = attendance.find((x) => x.child_id === c.id);
-    const state = !a || !a.arrived_at ? "expected" : a.collected_at ? "collected" : "present";
-    if (filter === "all") return true;
+    const scheduled = todayWeekday ? (c.expected_days ?? []).includes(todayWeekday) : false;
+    let state: "present" | "collected" | "expected" | "off";
+    if (a?.arrived_at) state = a.collected_at ? "collected" : "present";
+    else state = scheduled ? "expected" : "off";
+    if (filter === "all") return state !== "off";
     return state === filter;
   });
 
@@ -174,7 +179,7 @@ function RegisterContent() {
 
       {/* Filter chips */}
       <div className="flex flex-wrap gap-2">
-        {(["all", "present", "expected", "collected"] as FilterMode[]).map((f) => (
+        {(["all", "present", "expected", "collected", "off"] as FilterMode[]).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
@@ -185,7 +190,7 @@ function RegisterContent() {
                 : "bg-background border-foreground/15 hover:border-foreground/30"
             )}
           >
-            {f}
+            {f === "all" ? "Today" : f === "off" ? "Not scheduled" : f}
           </button>
         ))}
       </div>

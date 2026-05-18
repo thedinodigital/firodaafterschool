@@ -1,0 +1,1 @@
+ALTER TABLE public.fas_children ADD COLUMN expected_days text[] NOT NULL DEFAULT ARRAY[]::text[];
