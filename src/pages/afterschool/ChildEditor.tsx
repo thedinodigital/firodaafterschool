@@ -549,3 +549,123 @@ function InvoicePreview({ childId }: { childId: string }) {
     </Card>
   );
 }
+
+function IncidentsSection({ childId, childName }: { childId: string; childName: string }) {
+  const qc = useQueryClient();
+  const q = useQuery({ queryKey: ["fas_incidents", childId], queryFn: () => fetchIncidentsFor(childId) });
+  const [showAdd, setShowAdd] = useState(false);
+  const [editing, setEditing] = useState<FasIncident | null>(null);
+  const refresh = () => qc.invalidateQueries({ queryKey: ["fas_incidents", childId] });
+
+  const empty = { occurred_at: new Date().toISOString().slice(0, 16), category: "minor" as FasIncident["category"], summary: "", action_taken: "", reported_by: "", parent_notified: false, notes: "" };
+  const [draft, setDraft] = useState(empty);
+
+  const startEdit = (i: FasIncident) => {
+    setEditing(i);
+    setShowAdd(true);
+    setDraft({
+      occurred_at: i.occurred_at.slice(0, 16),
+      category: i.category,
+      summary: i.summary,
+      action_taken: i.action_taken ?? "",
+      reported_by: i.reported_by ?? "",
+      parent_notified: i.parent_notified,
+      notes: i.notes ?? "",
+    });
+  };
+
+  const save = async () => {
+    if (!draft.summary.trim()) return toast.error("Add a short summary.");
+    const payload = {
+      child_id: childId,
+      occurred_at: new Date(draft.occurred_at).toISOString(),
+      category: draft.category,
+      summary: draft.summary.trim(),
+      action_taken: draft.action_taken.trim() || null,
+      reported_by: draft.reported_by.trim() || null,
+      parent_notified: draft.parent_notified,
+      notes: draft.notes.trim() || null,
+    };
+    if (editing) {
+      await supabase.from("fas_incidents" as never).update(payload as never).eq("id", editing.id);
+    } else {
+      await supabase.from("fas_incidents" as never).insert(payload as never);
+    }
+    toast.success("Incident saved.");
+    setShowAdd(false); setEditing(null); setDraft(empty);
+    refresh();
+  };
+
+  const remove = async (incId: string) => {
+    await supabase.from("fas_incidents" as never).delete().eq("id", incId);
+    refresh();
+  };
+
+  const toneFor = (c: FasIncident["category"]) =>
+    c === "serious" ? "text-red-700 bg-red-50 border-red-200" :
+    c === "moderate" || c === "medical" ? "text-amber-800 bg-amber-50 border-amber-200" :
+    c === "behaviour" ? "text-foreground/70 bg-foreground/[0.03] border-foreground/15" :
+    "text-foreground/65 bg-foreground/[0.02] border-foreground/10";
+
+  return (
+    <Card title="Incidents">
+      {q.isLoading ? <p className="text-sm text-foreground/55">Loading…</p> :
+        (q.data ?? []).length === 0 ? <p className="text-sm text-foreground/55 italic">No incidents logged.</p> : (
+          <ul className="space-y-3">
+            {q.data!.map((i) => (
+              <li key={i.id} className={`border rounded-md p-3 ${toneFor(i.category)}`}>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-xs uppercase tracking-wider opacity-70">
+                      {new Date(i.occurred_at).toLocaleString("en-IE", { dateStyle: "medium", timeStyle: "short" })} · {i.category}
+                      {i.parent_notified && <span className="ml-2">· parent notified</span>}
+                    </p>
+                    <p className="text-sm font-medium mt-1">{i.summary}</p>
+                    {i.action_taken && <p className="text-xs mt-1"><strong>Action:</strong> {i.action_taken}</p>}
+                    {i.reported_by && <p className="text-xs opacity-75 mt-1">Reported by {i.reported_by}</p>}
+                    {i.notes && <p className="text-xs mt-1 whitespace-pre-wrap">{i.notes}</p>}
+                  </div>
+                  <div className="flex gap-1 shrink-0">
+                    <Button size="sm" variant="ghost" onClick={() => startEdit(i)}>Edit</Button>
+                    <Button size="sm" variant="ghost" className="text-red-700" onClick={() => remove(i.id)}><Trash2 className="w-4 h-4" /></Button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+      {showAdd ? (
+        <div className="mt-4 grid sm:grid-cols-2 gap-3 p-3 rounded-md bg-cream-warm">
+          <Field label="When"><Input type="datetime-local" value={draft.occurred_at} onChange={(e) => setDraft({ ...draft, occurred_at: e.target.value })} /></Field>
+          <Field label="Category">
+            <Select value={draft.category} onValueChange={(v) => setDraft({ ...draft, category: v as FasIncident["category"] })}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="minor">Minor</SelectItem>
+                <SelectItem value="moderate">Moderate</SelectItem>
+                <SelectItem value="serious">Serious</SelectItem>
+                <SelectItem value="behaviour">Behaviour</SelectItem>
+                <SelectItem value="medical">Medical</SelectItem>
+              </SelectContent>
+            </Select>
+          </Field>
+          <div className="sm:col-span-2"><Field label="Summary"><Input value={draft.summary} onChange={(e) => setDraft({ ...draft, summary: e.target.value })} placeholder={`e.g. ${childName} fell on the yard`} /></Field></div>
+          <div className="sm:col-span-2"><Field label="Action taken"><Textarea rows={2} value={draft.action_taken} onChange={(e) => setDraft({ ...draft, action_taken: e.target.value })} /></Field></div>
+          <Field label="Reported by"><Input value={draft.reported_by} onChange={(e) => setDraft({ ...draft, reported_by: e.target.value })} placeholder="Staff name" /></Field>
+          <label className="flex items-center gap-2 text-sm self-end">
+            <input type="checkbox" checked={draft.parent_notified} onChange={(e) => setDraft({ ...draft, parent_notified: e.target.checked })} />
+            Parent / guardian notified
+          </label>
+          <div className="sm:col-span-2"><Field label="Notes (optional)"><Textarea rows={2} value={draft.notes} onChange={(e) => setDraft({ ...draft, notes: e.target.value })} /></Field></div>
+          <div className="sm:col-span-2 flex gap-2">
+            <Button size="sm" onClick={save}>{editing ? "Save changes" : "Log incident"}</Button>
+            <Button size="sm" variant="ghost" onClick={() => { setShowAdd(false); setEditing(null); setDraft(empty); }}>Cancel</Button>
+          </div>
+        </div>
+      ) : (
+        <Button variant="ghost" size="sm" onClick={() => { setShowAdd(true); setEditing(null); setDraft(empty); }} className="mt-3"><Plus className="w-4 h-4 mr-1" />Log incident</Button>
+      )}
+    </Card>
+  );
+}
