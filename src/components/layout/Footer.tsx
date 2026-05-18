@@ -129,7 +129,15 @@ export function Footer() {
 
         <div className="mt-14 pt-8 border-t border-footer-foreground/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-footer-muted">
           <p>© {new Date().getFullYear()} Holy Cross National School, Firoda. All rights reserved.</p>
-          <p>Designed by <span className="text-footer-foreground/80">Dino Digital</span></p>
+          <div className="flex items-center gap-5">
+            <Link
+              to="/admin/login"
+              className="text-footer-foreground/40 hover:text-footer-foreground/70 transition-colors"
+            >
+              Staff sign in →
+            </Link>
+            <p>Designed by <span className="text-footer-foreground/80">Dino Digital</span></p>
+          </div>
         </div>
       </div>
     </footer>

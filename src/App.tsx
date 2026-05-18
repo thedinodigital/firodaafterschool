@@ -46,6 +46,14 @@ const ArchivePage = lazy(() => import("./pages/archive/ArchivePage"));
 // Contact
 const Contact = lazy(() => import("./pages/Contact"));
 
+// Admin
+const AdminLogin = lazy(() => import("./pages/admin/Login"));
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
+const AdminNewsList = lazy(() => import("./pages/admin/NewsList"));
+const AdminNewsEditor = lazy(() => import("./pages/admin/NewsEditor"));
+import { AuthProvider } from "./hooks/useAuth";
+import { RequireAuth } from "./pages/admin/RequireAuth";
+
 const queryClient = new QueryClient();
 
 const Loading = () => (
@@ -66,43 +74,52 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route path="/" element={<Index />} />
+        <AuthProvider>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
 
-            <Route path="/our-school" element={<OurSchool />} />
-            <Route path="/our-school/ethos" element={<Ethos />} />
-            <Route path="/our-school/history" element={<History />} />
-            <Route path="/our-school/staff" element={<Staff />} />
-            <Route path="/our-school/board" element={<Board />} />
+              <Route path="/our-school" element={<OurSchool />} />
+              <Route path="/our-school/ethos" element={<Ethos />} />
+              <Route path="/our-school/history" element={<History />} />
+              <Route path="/our-school/staff" element={<Staff />} />
+              <Route path="/our-school/board" element={<Board />} />
 
-            <Route path="/parents" element={<Parents />} />
-            <Route path="/parents/admissions" element={<Admissions />} />
-            <Route path="/parents/calendar" element={<Calendar />} />
-            <Route path="/parents/newsletters" element={<Newsletters />} />
-            <Route path="/parents/uniform" element={<Uniform />} />
-            <Route path="/parents/booklists" element={<Booklists />} />
-            <Route path="/parents/bi-cinealta" element={<BiCinealta />} />
-            <Route path="/parents/funding" element={<Funding />} />
+              <Route path="/parents" element={<Parents />} />
+              <Route path="/parents/admissions" element={<Admissions />} />
+              <Route path="/parents/calendar" element={<Calendar />} />
+              <Route path="/parents/newsletters" element={<Newsletters />} />
+              <Route path="/parents/uniform" element={<Uniform />} />
+              <Route path="/parents/booklists" element={<Booklists />} />
+              <Route path="/parents/bi-cinealta" element={<BiCinealta />} />
+              <Route path="/parents/funding" element={<Funding />} />
 
-            <Route path="/news" element={<News />} />
-            <Route path="/news/:slug" element={<NewsPost />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/news/:slug" element={<NewsPost />} />
 
-            <Route path="/activities" element={<Activities />} />
-            <Route path="/activities/:slug" element={<ActivityPage />} />
+              <Route path="/activities" element={<Activities />} />
+              <Route path="/activities/:slug" element={<ActivityPage />} />
 
-            <Route path="/after-school" element={<AfterSchool />} />
+              <Route path="/after-school" element={<AfterSchool />} />
 
-            <Route path="/policies" element={<Policies />} />
+              <Route path="/policies" element={<Policies />} />
 
-            <Route path="/archive" element={<Archive />} />
-            <Route path="/archive/:slug" element={<ArchivePage />} />
+              <Route path="/archive" element={<Archive />} />
+              <Route path="/archive/:slug" element={<ArchivePage />} />
 
-            <Route path="/contact" element={<Contact />} />
+              <Route path="/contact" element={<Contact />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+              {/* Admin */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<RequireAuth><AdminDashboard /></RequireAuth>} />
+              <Route path="/admin/news" element={<RequireAuth><AdminNewsList /></RequireAuth>} />
+              <Route path="/admin/news/new" element={<RequireAuth><AdminNewsEditor /></RequireAuth>} />
+              <Route path="/admin/news/:id/edit" element={<RequireAuth><AdminNewsEditor /></RequireAuth>} />
+
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
