@@ -74,7 +74,7 @@ function ChildrenContent() {
               {filtered.map((c) => (
                 <tr key={c.id} className="hover:bg-foreground/[0.02]">
                   <td className="px-4 py-3 font-medium">
-                    <Link to={`/afterschool-admin/children/${c.id}`} className="hover:text-accent">
+                    <Link to={`/afterschool-admin/children/${c.id}/edit`} className="hover:text-accent">
                       {c.first_name} {c.last_name}
                     </Link>
                     {c.allergies_and_medical && <span className="ml-2 text-xs text-red-700">⚠</span>}
@@ -87,8 +87,8 @@ function ChildrenContent() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <Link to={`/afterschool-admin/children/${c.id}`} className="text-xs text-accent hover:underline">
-                      Open →
+                    <Link to={`/afterschool-admin/children/${c.id}/edit`} className="text-xs text-accent hover:underline">
+                      Edit / delete →
                     </Link>
                   </td>
                 </tr>

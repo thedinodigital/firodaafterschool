@@ -139,6 +139,7 @@ const App = () => (
               <Route path="/afterschool-admin/register" element={<FasRegister />} />
               <Route path="/afterschool-admin/children" element={<FasChildren />} />
               <Route path="/afterschool-admin/children/new" element={<FasChildEditor />} />
+              <Route path="/afterschool-admin/children/:id" element={<FasChildEditor />} />
               <Route path="/afterschool-admin/children/:id/edit" element={<FasChildEditor />} />
               <Route path="/afterschool-admin/staff" element={<FasStaff />} />
               <Route path="/afterschool-admin/invoices" element={<FasInvoices />} />
