@@ -142,9 +142,10 @@ export const DEFAULT_PAGE_CONTENT: FasPageContent = {
     items: [
       { label: "Hours", value: "2.30pm – 6.00pm, term time only" },
       { label: "Days", value: "Monday to Friday — full or selected days" },
-      { label: "Pricing", value: "[to be confirmed]" },
+      { label: "Pricing", value: "From €[X] per day · €[X] per week · selected days from €[X]." },
       { label: "Booking", value: "In advance, via the form below" },
-      { label: "Payment", value: "[to be confirmed]" },
+      { label: "Payment", value: "[weekly/monthly in advance, bank transfer or card]" },
+      { label: "National Childcare Scheme (NCS)", value: "We're NCS-registered — eligible families can reduce fees through the government subsidy. Ask us how." },
       { label: "First day", value: "A short orientation visit beforehand is welcome" },
     ],
   },
