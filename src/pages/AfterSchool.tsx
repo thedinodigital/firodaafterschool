@@ -313,6 +313,83 @@ const AfterSchool = () => {
         </div>
       </section>
 
+      {/* WHO LOOKS AFTER YOUR CHILD */}
+      <section className="bg-cream-warm border-t border-foreground/10">
+        <div className="container py-20 lg:py-24">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="lg:col-span-5">
+              {/* TODO[school]: replace with a real photo of the team */}
+              <div className="rounded-2xl overflow-hidden border border-foreground/10 bg-cream aspect-[4/3] flex items-center justify-center text-center p-6">
+                <p className="font-heading italic text-sm text-foreground/50">
+                  [Photo of the After School team]
+                </p>
+              </div>
+            </div>
+            <div className="lg:col-span-7">
+              <p className="label-eyebrow mb-4">Our team</p>
+              <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
+                Who looks after <span className="italic text-accent">your child</span>.
+              </h2>
+              <p className="mt-5 text-lg text-foreground/75 leading-relaxed">
+                Firoda After School is led by [Name], [qualification], part of the Holy Cross
+                community since [year].
+              </p>
+              <div className="mt-6 space-y-3">
+                {/* TODO[school]: add 1–2 more named staff here */}
+                <p className="text-foreground/70">
+                  <span className="font-heading font-medium text-foreground">[Staff name]</span> — [role / qualification].
+                </p>
+                <p className="text-foreground/70">
+                  <span className="font-heading font-medium text-foreground">[Staff name]</span> — [role / qualification].
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PHOTO SLOTS */}
+      <section className="bg-cream">
+        <div className="container py-20 lg:py-24">
+          <div className="max-w-2xl mb-12">
+            <p className="label-eyebrow mb-4">A look around</p>
+            <h2 className="font-heading text-4xl md:text-5xl font-medium leading-[1.05] text-balance">
+              Where the afternoon <span className="italic text-accent">happens</span>.
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {photoSlots.map((slot) => (
+              <figure
+                key={slot.label}
+                className="rounded-2xl overflow-hidden border border-foreground/10 bg-cream-warm/60"
+              >
+                {/* TODO[school]: swap this block for <img src="..." alt={slot.alt} loading="lazy" className="w-full aspect-[4/3] object-cover" /> */}
+                <div className="aspect-[4/3] flex items-center justify-center">
+                  <AfterSchoolSceneSVG className="w-full h-full object-cover opacity-80" />
+                </div>
+                <figcaption className="px-4 py-3 text-sm text-foreground/70 italic">
+                  [Photo: {slot.label}] — alt text: “{slot.alt}”
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIAL */}
+      <section className="bg-cream border-y border-foreground/10">
+        <div className="container py-16 lg:py-20">
+          <blockquote className="max-w-3xl mx-auto text-center">
+            <p className="font-heading text-2xl md:text-3xl font-medium leading-snug text-balance">
+              “<span className="italic text-accent">[Parent or principal quote]</span>”
+            </p>
+            <footer className="mt-5 text-sm text-foreground/60">
+              — [Name], [parent of / principal]
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
       {/* ENQUIRY FORM */}
       <section id="enquire" className="bg-cream-warm">
         <div className="container py-20 lg:py-24">
