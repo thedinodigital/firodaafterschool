@@ -156,13 +156,21 @@ const AfterSchool = () => {
               { label: "Hours", value: "2.30pm – 6pm", sub: "School days", Icon: Clock },
               { label: "Ages", value: "Junior Infants → 6th", sub: "All primary years", Icon: Users },
               { label: "Location", value: "On-site", sub: "At Holy Cross N.S.", Icon: MapPin },
-              { label: "Contact", value: "Get in touch", sub: "via the form below", Icon: Phone },
+              { label: "Contact", value: PHONE_DISPLAY, sub: "Tap to call", Icon: Phone, href: PHONE_TEL },
             ].map((card) => (
               <div key={card.label} className="flex items-start gap-4">
                 <card.Icon className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-heading italic text-sm text-foreground/60">{card.label}</p>
-                  <p className="font-heading text-lg font-medium leading-tight mt-0.5">{card.value}</p>
+                  <p className="font-heading text-lg font-medium leading-tight mt-0.5">
+                    {card.href ? (
+                      <a href={card.href} className="hover:text-accent underline-offset-2 hover:underline">
+                        {card.value}
+                      </a>
+                    ) : (
+                      card.value
+                    )}
+                  </p>
                   <p className="text-xs text-foreground/55 mt-1">{card.sub}</p>
                 </div>
               </div>
@@ -170,6 +178,30 @@ const AfterSchool = () => {
           </div>
         </div>
       </section>
+
+      {/* SAFETY & PEACE OF MIND */}
+      <section className="bg-cream">
+        <div className="container py-16 lg:py-20">
+          <div className="max-w-2xl mb-10">
+            <p className="label-eyebrow mb-4">Safety &amp; peace of mind</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-medium leading-[1.1] text-balance">
+              Cared for by people you can <span className="italic text-accent">trust</span>.
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {safetyPoints.map((p) => (
+              <div
+                key={p.title}
+                className="rounded-2xl border border-foreground/10 bg-cream-warm/50 p-7 hover:bg-cream-warm transition-colors"
+              >
+                <h3 className="font-heading text-xl font-medium mb-2">{p.title}</h3>
+                <p className="text-sm text-foreground/70 leading-relaxed">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* WHAT'S OFFERED */}
       <section id="offer" className="bg-cream">
