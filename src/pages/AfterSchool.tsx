@@ -40,6 +40,27 @@ import {
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
+// TODO[school]: replace with the real number
+const PHONE_DISPLAY = "[phone number]";
+const PHONE_TEL = "tel:[phone number]";
+
+const safetyPoints = [
+  { title: "Garda-vetted staff", body: "Every member of our team is Garda vetted." },
+  { title: "Tusla registered", body: "A registered school-age service with Tusla (reg. [XXXX])." },
+  {
+    title: "First-aid trained",
+    body: "Staff are first-aid trained, with [name] as our designated child-protection lead.",
+  },
+  { title: "Small groups", body: "A [X]:1 child-to-staff ratio, so every child is known by name." },
+];
+
+// TODO[school]: swap the placeholders below for real photographs
+const photoSlots = [
+  { label: "The after-school room", alt: "The Firoda After School room, set up for the afternoon" },
+  { label: "The yard & outdoor space", alt: "Children playing in the yard at Holy Cross N.S., Firoda" },
+  { label: "Snack & activity time", alt: "Children at snack and activity time in Firoda After School" },
+];
+
 const AfterSchool = () => {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
