@@ -454,7 +454,13 @@ const AfterSchool = () => {
       {/* PAGE FOOTER NOTE */}
       <section className="bg-cream">
         <div className="container py-10 text-center max-w-2xl">
-          <p className="text-xs text-foreground/55 leading-relaxed">
+          <p className="text-sm text-foreground/70">
+            Prefer to talk it through?{" "}
+            <a href={PHONE_TEL} className="font-heading italic text-accent underline underline-offset-2">
+              {PHONE_DISPLAY}
+            </a>
+          </p>
+          <p className="mt-4 text-xs text-foreground/55 leading-relaxed">
             Firoda After School is operated as a separate business at Holy Cross N.S.,
             Firoda. For school enquiries, please visit the{" "}
             <Link to="/" className="underline underline-offset-2 hover:text-accent">
