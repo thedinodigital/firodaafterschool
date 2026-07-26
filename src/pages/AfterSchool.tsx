@@ -132,7 +132,18 @@ const AfterSchool = () => {
                     </a>
                   </Button>
                 )}
+                <Button asChild variant="outline" size="lg">
+                  <a href={PHONE_TEL}>
+                    <Phone className="w-4 h-4" /> {PHONE_DISPLAY}
+                  </a>
+                </Button>
               </div>
+              <p className="text-sm text-foreground/60">
+                Or ring us directly on{" "}
+                <a href={PHONE_TEL} className="font-heading italic text-accent underline underline-offset-2">
+                  {PHONE_DISPLAY}
+                </a>
+              </p>
             </div>
 
             <div className="lg:col-span-5 animate-fade-in-right" style={{ animationDelay: "0.15s" }}>
