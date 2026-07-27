@@ -218,7 +218,12 @@ export function Header() {
             ))}
             <div className="pt-3">
               <Button asChild variant="accent" className="w-full">
-                <Link to="/parents/admissions">Enrol 2026–27</Link>
+                {SCHOOL_SITE_ENABLED ? (
+                  <Link to="/parents/admissions">Enrol 2026–27</Link>
+                ) : (
+                  <Link to="/after-school#enquire">Enquire about a place</Link>
+                )}
+
               </Button>
             </div>
           </div>
