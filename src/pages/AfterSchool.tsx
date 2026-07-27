@@ -8,6 +8,7 @@ import {
   Users,
   MapPin,
   Phone,
+  ShieldCheck,
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
@@ -88,7 +89,7 @@ const AfterSchool = () => {
         description="Firoda After School is a warm, well-run after-school programme operating on-site at Holy Cross N.S., Firoda. 2.30pm – 6pm, term time. Junior Infants to 6th Class."
       />
 
-      {/* HERO */}
+      {/* HERO BENTO */}
       <section className="relative overflow-hidden bg-cream-warm grain-overlay">
         <div
           className="absolute inset-0 pointer-events-none opacity-70"
@@ -98,37 +99,28 @@ const AfterSchool = () => {
           }}
           aria-hidden="true"
         />
-        <div className="container relative pt-14 pb-16 lg:pt-20 lg:pb-24">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6 animate-fade-in-up">
+        <div className="container relative pt-10 pb-14 lg:pt-16 lg:pb-20">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 auto-rows-auto">
+            {/* Headline tile */}
+            <div className="col-span-2 lg:col-span-2 lg:row-span-2 rounded-3xl bg-background border border-foreground/10 shadow-soft p-7 lg:p-10 flex flex-col justify-center motion-safe:animate-fade-in-up">
               {c.hero.eyebrow && <p className="label-eyebrow">{c.hero.eyebrow}</p>}
-
-              <h1 className="font-heading text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-[3.75rem] font-medium tracking-tight text-balance">
+              <h1 className="mt-4 font-heading text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-[3.5rem] font-medium tracking-tight text-balance">
                 {c.hero.headline_lead}
                 {c.hero.headline_italic && (
                   <span className="italic text-accent">{c.hero.headline_italic}</span>
                 )}
                 {c.hero.headline_tail}
               </h1>
-
               {c.hero.intro && (
-                <p className="text-lg md:text-xl text-foreground/75 max-w-xl leading-relaxed">
+                <p className="mt-5 text-base md:text-lg text-foreground/75 leading-relaxed">
                   {c.hero.intro}
                 </p>
               )}
-
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <div className="mt-7 flex flex-col sm:flex-row gap-3">
                 {c.hero.primary_cta_label && (
                   <Button asChild variant="forest" size="lg">
                     <a href="#enquire">
                       {c.hero.primary_cta_label} <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </Button>
-                )}
-                {c.hero.secondary_cta_label && (
-                  <Button asChild variant="outline" size="lg">
-                    <a href="#offer">
-                      {c.hero.secondary_cta_label} <ArrowRight className="w-4 h-4" />
                     </a>
                   </Button>
                 )}
@@ -138,60 +130,91 @@ const AfterSchool = () => {
                   </a>
                 </Button>
               </div>
-              <p className="text-sm text-foreground/60">
-                Or ring us directly on{" "}
-                <a href={PHONE_TEL} className="font-heading italic text-accent underline underline-offset-2">
-                  {PHONE_DISPLAY}
-                </a>
-              </p>
             </div>
 
-            <div className="lg:col-span-5 animate-fade-in-right" style={{ animationDelay: "0.15s" }}>
-              <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-elevated bg-cream-warm">
-                {heroUrl ? (
-                  <img src={heroUrl} alt="Firoda After School" className="w-full h-auto block aspect-[4/3] object-cover" />
-                ) : (
-                  <AfterSchoolSceneSVG className="w-full h-auto block" />
-                )}
-              </div>
+            {/* Picture tile */}
+            <div className="col-span-2 lg:col-span-2 lg:row-span-2 rounded-3xl overflow-hidden border border-foreground/10 shadow-elevated bg-cream motion-safe:animate-fade-in-right">
+              {heroUrl ? (
+                <img
+                  src={heroUrl}
+                  alt="Firoda After School"
+                  className="w-full h-full min-h-[220px] object-cover"
+                />
+              ) : (
+                <AfterSchoolSceneSVG className="w-full h-full object-cover" />
+              )}
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* AT-A-GLANCE BAR */}
-      <section className="bg-cream border-y border-foreground/10">
-        <div className="container py-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
+            {/* Small fact tiles */}
             {[
-              { label: "Hours", value: "2.30pm – 6pm", sub: "School days", Icon: Clock },
-              { label: "Ages", value: "Junior Infants → 6th", sub: "All primary years", Icon: Users },
-              { label: "Location", value: "On-site", sub: "At Holy Cross N.S.", Icon: MapPin },
-              { label: "Contact", value: PHONE_DISPLAY, sub: "Tap to call", Icon: Phone, href: PHONE_TEL },
-            ].map((card) => (
-              <div key={card.label} className="flex items-start gap-4">
-                <card.Icon className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <p className="font-heading italic text-sm text-foreground/60">{card.label}</p>
-                  <p className="font-heading text-lg font-medium leading-tight mt-0.5">
-                    {card.href ? (
-                      <a href={card.href} className="hover:text-accent underline-offset-2 hover:underline">
-                        {card.value}
-                      </a>
-                    ) : (
-                      card.value
-                    )}
-                  </p>
-                  <p className="text-xs text-foreground/55 mt-1">{card.sub}</p>
-                </div>
+              { label: "Hours", value: "2.30 – 6pm", sub: "Every school day", Icon: Clock },
+              { label: "Ages", value: "JI → 6th", sub: "All primary years", Icon: Users },
+              { label: "Where", value: "On-site", sub: "At Holy Cross N.S.", Icon: MapPin },
+              { label: "Ring us", value: PHONE_DISPLAY, sub: "Tap to call", Icon: Phone, href: PHONE_TEL },
+            ].map((t) => (
+              <div
+                key={t.label}
+                className="rounded-3xl bg-background border border-foreground/10 p-5 lg:p-6"
+              >
+                <t.Icon className="w-5 h-5 text-accent" aria-hidden="true" />
+                <p className="mt-3 font-heading italic text-xs text-foreground/55">{t.label}</p>
+                <p className="font-heading text-lg lg:text-xl font-medium leading-tight mt-0.5">
+                  {t.href ? (
+                    <a href={t.href} className="hover:text-accent underline-offset-2 hover:underline">
+                      {t.value}
+                    </a>
+                  ) : (
+                    t.value
+                  )}
+                </p>
+                <p className="text-xs text-foreground/55 mt-1">{t.sub}</p>
               </div>
             ))}
+
+            {/* Fees + NCS tile */}
+            <div className="col-span-2 lg:col-span-2 rounded-3xl bg-forest-deep grain-overlay p-7 lg:p-8 flex flex-col justify-center">
+              <p className="label-eyebrow-cream">Fees &amp; the childcare subsidy</p>
+              <p className="mt-3 font-heading text-background text-2xl lg:text-3xl font-medium leading-snug text-balance">
+                {/* TODO[school]: replace [X] with the real daily rate */}
+                From <span className="italic text-accent-soft">€[X] a day</span> — and we&apos;re
+                NCS-registered.
+              </p>
+              <p className="mt-3 text-background/75 text-sm leading-relaxed">
+                Eligible families can cut the cost through the National Childcare Scheme. Ask us
+                how — we&apos;ll walk you through it.
+              </p>
+              <a
+                href="#practical"
+                className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent-soft hover:text-background transition-colors"
+              >
+                See all the practical details <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+
+            {/* Trust strip tile */}
+            <div className="col-span-2 lg:col-span-2 rounded-3xl bg-background border border-foreground/10 p-7 lg:p-8">
+              <p className="label-eyebrow">Peace of mind</p>
+              <ul className="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-3">
+                {safetyPoints.map((p) => (
+                  <li key={p.title} className="flex items-start gap-2.5">
+                    <ShieldCheck className="w-4 h-4 text-accent mt-1 flex-shrink-0" aria-hidden="true" />
+                    <span className="text-sm text-foreground/80 leading-snug">{p.title}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#safety"
+                className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition-colors"
+              >
+                How we keep children safe <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* SAFETY & PEACE OF MIND */}
-      <section className="bg-cream">
+      <section id="safety" className="bg-cream scroll-mt-24">
         <div className="container py-16 lg:py-20">
           <div className="max-w-2xl mb-10">
             <p className="label-eyebrow mb-4">Safety &amp; peace of mind</p>
@@ -199,12 +222,15 @@ const AfterSchool = () => {
               Cared for by people you can <span className="italic text-accent">trust</span>.
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {safetyPoints.map((p) => (
               <div
                 key={p.title}
-                className="rounded-2xl border border-foreground/10 bg-cream-warm/50 p-7 hover:bg-cream-warm transition-colors"
+                className="rounded-3xl border border-foreground/10 bg-cream-warm/60 p-7 hover:bg-cream-warm transition-colors"
               >
+                <div className="w-10 h-10 rounded-2xl bg-gold-soft flex items-center justify-center mb-4">
+                  <ShieldCheck className="w-5 h-5 text-primary" aria-hidden="true" />
+                </div>
                 <h3 className="font-heading text-xl font-medium mb-2">{p.title}</h3>
                 <p className="text-sm text-foreground/70 leading-relaxed">{p.body}</p>
               </div>
@@ -212,6 +238,7 @@ const AfterSchool = () => {
           </div>
         </div>
       </section>
+
 
 
       {/* WHAT'S OFFERED */}
@@ -329,7 +356,8 @@ const AfterSchool = () => {
       )}
 
       {/* PRACTICALITIES */}
-      <section className="bg-cream">
+      <section id="practical" className="bg-cream scroll-mt-24">
+
         <div className="container py-20 lg:py-24">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4">
@@ -400,14 +428,16 @@ const AfterSchool = () => {
               Where the afternoon <span className="italic text-accent">happens</span>.
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {photoSlots.map((slot) => (
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+            {photoSlots.map((slot, i) => (
               <figure
                 key={slot.label}
-                className="rounded-2xl overflow-hidden border border-foreground/10 bg-cream-warm/60"
+                className={`rounded-3xl overflow-hidden border border-foreground/10 bg-cream-warm/60 ${
+                  i === 0 ? "col-span-2 lg:col-span-2 lg:row-span-2" : "col-span-2 sm:col-span-1 lg:col-span-1"
+                }`}
               >
-                {/* TODO[school]: swap this block for <img src="..." alt={slot.alt} loading="lazy" className="w-full aspect-[4/3] object-cover" /> */}
-                <div className="aspect-[4/3] flex items-center justify-center">
+                {/* TODO[school]: swap this block for <img src="..." alt={slot.alt} loading="lazy" className="w-full h-full object-cover" /> */}
+                <div className={i === 0 ? "aspect-[16/10] lg:aspect-[4/3]" : "aspect-[4/3]"}>
                   <AfterSchoolSceneSVG className="w-full h-full object-cover opacity-80" />
                 </div>
                 <figcaption className="px-4 py-3 text-sm text-foreground/70 italic">
@@ -416,6 +446,7 @@ const AfterSchool = () => {
               </figure>
             ))}
           </div>
+
         </div>
       </section>
 
