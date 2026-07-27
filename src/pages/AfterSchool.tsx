@@ -356,7 +356,8 @@ const AfterSchool = () => {
       )}
 
       {/* PRACTICALITIES */}
-      <section className="bg-cream">
+      <section id="practical" className="bg-cream scroll-mt-24">
+
         <div className="container py-20 lg:py-24">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4">
