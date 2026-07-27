@@ -428,14 +428,16 @@ const AfterSchool = () => {
               Where the afternoon <span className="italic text-accent">happens</span>.
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {photoSlots.map((slot) => (
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+            {photoSlots.map((slot, i) => (
               <figure
                 key={slot.label}
-                className="rounded-2xl overflow-hidden border border-foreground/10 bg-cream-warm/60"
+                className={`rounded-3xl overflow-hidden border border-foreground/10 bg-cream-warm/60 ${
+                  i === 0 ? "col-span-2 lg:col-span-2 lg:row-span-2" : "col-span-2 sm:col-span-1 lg:col-span-1"
+                }`}
               >
-                {/* TODO[school]: swap this block for <img src="..." alt={slot.alt} loading="lazy" className="w-full aspect-[4/3] object-cover" /> */}
-                <div className="aspect-[4/3] flex items-center justify-center">
+                {/* TODO[school]: swap this block for <img src="..." alt={slot.alt} loading="lazy" className="w-full h-full object-cover" /> */}
+                <div className={i === 0 ? "aspect-[16/10] lg:aspect-[4/3]" : "aspect-[4/3]"}>
                   <AfterSchoolSceneSVG className="w-full h-full object-cover opacity-80" />
                 </div>
                 <figcaption className="px-4 py-3 text-sm text-foreground/70 italic">
@@ -444,6 +446,7 @@ const AfterSchool = () => {
               </figure>
             ))}
           </div>
+
         </div>
       </section>
 
