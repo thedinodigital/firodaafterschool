@@ -8,6 +8,7 @@ import {
   Users,
   MapPin,
   Phone,
+  ShieldCheck,
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Seo } from "@/components/Seo";
