@@ -148,7 +148,7 @@ export function Footer() {
           <p>© {new Date().getFullYear()} Holy Cross National School, Firoda. All rights reserved.</p>
           <div className="flex items-center gap-5">
             <Link
-              to="/admin/login"
+              to={SCHOOL_SITE_ENABLED ? "/admin/login" : "/afterschool-admin/login"}
               className="text-footer-foreground/40 hover:text-footer-foreground/70 transition-colors"
             >
               Staff sign in →
