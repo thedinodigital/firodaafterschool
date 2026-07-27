@@ -116,12 +116,15 @@ export function Footer() {
                   office@holycrossfiroda.ie
                 </a>
               </li>
-              <li>
-                <Link to="/contact" className="flex items-start gap-3 text-footer-foreground/80 hover:text-background transition-colors">
-                  <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent-soft" />
-                  Directions
-                </Link>
-              </li>
+              {SCHOOL_SITE_ENABLED && (
+                <li>
+                  <Link to="/contact" className="flex items-start gap-3 text-footer-foreground/80 hover:text-background transition-colors">
+                    <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent-soft" />
+                    Directions
+                  </Link>
+                </li>
+              )}
+
               <li>
                 <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-footer-foreground/80 hover:text-background transition-colors">
                   <Twitter className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent-soft" />
