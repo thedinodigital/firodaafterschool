@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/utils";
+import { SCHOOL_SITE_ENABLED } from "@/config/site";
 
 interface NavItem {
   name: string;
@@ -11,7 +12,8 @@ interface NavItem {
   children?: { name: string; href: string }[];
 }
 
-const navigation: NavItem[] = [
+const schoolNavigation: NavItem[] = [
+
   {
     name: "Our School",
     href: "/our-school",
