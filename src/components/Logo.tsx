@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import crest from "@/assets/logo.png";
+import { HOME_PATH } from "@/config/site";
 
 interface LogoProps {
   className?: string;
@@ -16,7 +17,7 @@ export function Logo({ className, variant = "default", showWordmark = true }: Lo
   const isCream = variant === "cream";
   return (
     <Link
-      to="/"
+      to={HOME_PATH}
       className={cn("flex items-center gap-3 group", className)}
       aria-label="Holy Cross National School, Firoda — Home"
     >
