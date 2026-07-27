@@ -73,6 +73,14 @@ const schoolNavigation: NavItem[] = [
   { name: "Contact", href: "/contact" },
 ];
 
+// Firoda After School only — used when the school site is switched off.
+const afterSchoolNavigation: NavItem[] = [
+  { name: "After School", href: "/after-school" },
+];
+
+const navigation: NavItem[] = SCHOOL_SITE_ENABLED ? schoolNavigation : afterSchoolNavigation;
+
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
