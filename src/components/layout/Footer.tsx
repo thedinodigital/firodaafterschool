@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Twitter } from "lucide-react";
 import crest from "@/assets/logo.png";
+import { SCHOOL_SITE_ENABLED, HOME_PATH } from "@/config/site";
 
-const cols = [
+const schoolCols = [
   {
     title: "Our School",
     links: [
@@ -35,13 +36,26 @@ const cols = [
   },
 ];
 
+// Firoda After School only — used when the school site is switched off.
+const afterSchoolCols = [
+  {
+    title: "Firoda After School",
+    links: [
+      { name: "About the service", href: "/after-school" },
+      { name: "Enquire about a place", href: "/after-school#enquire" },
+    ],
+  },
+];
+
+const cols = SCHOOL_SITE_ENABLED ? schoolCols : afterSchoolCols;
+
 export function Footer() {
   return (
     <footer className="bg-footer text-footer-foreground mt-24">
       <div className="container py-16 lg:py-20">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
+        <div className={`grid sm:grid-cols-2 gap-10 lg:gap-12 ${SCHOOL_SITE_ENABLED ? "lg:grid-cols-5" : "lg:grid-cols-3"}`}>
           <div className="lg:col-span-1 space-y-5">
-            <Link to="/" className="inline-flex flex-col gap-3 group" aria-label="Holy Cross National School, Firoda — Home">
+            <Link to={HOME_PATH} className="inline-flex flex-col gap-3 group" aria-label="Holy Cross National School, Firoda — Home">
               <img
                 src={crest}
                 alt=""
@@ -102,12 +116,15 @@ export function Footer() {
                   office@holycrossfiroda.ie
                 </a>
               </li>
-              <li>
-                <Link to="/contact" className="flex items-start gap-3 text-footer-foreground/80 hover:text-background transition-colors">
-                  <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent-soft" />
-                  Directions
-                </Link>
-              </li>
+              {SCHOOL_SITE_ENABLED && (
+                <li>
+                  <Link to="/contact" className="flex items-start gap-3 text-footer-foreground/80 hover:text-background transition-colors">
+                    <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent-soft" />
+                    Directions
+                  </Link>
+                </li>
+              )}
+
               <li>
                 <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-footer-foreground/80 hover:text-background transition-colors">
                   <Twitter className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent-soft" />
@@ -131,7 +148,7 @@ export function Footer() {
           <p>© {new Date().getFullYear()} Holy Cross National School, Firoda. All rights reserved.</p>
           <div className="flex items-center gap-5">
             <Link
-              to="/admin/login"
+              to={SCHOOL_SITE_ENABLED ? "/admin/login" : "/afterschool-admin/login"}
               className="text-footer-foreground/40 hover:text-footer-foreground/70 transition-colors"
             >
               Staff sign in →

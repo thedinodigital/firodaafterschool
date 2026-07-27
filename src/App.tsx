@@ -2,7 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { SCHOOL_SITE_ENABLED, AFTER_SCHOOL_HOME } from "@/config/site";
+
 import { lazy, Suspense } from "react";
 
 import Index from "./pages/Index";
@@ -94,37 +96,55 @@ const App = () => (
         <AuthProvider>
           <Suspense fallback={<Loading />}>
             <Routes>
-              <Route path="/" element={<Index />} />
-
-              <Route path="/our-school" element={<OurSchool />} />
-              <Route path="/our-school/ethos" element={<Ethos />} />
-              <Route path="/our-school/history" element={<History />} />
-              <Route path="/our-school/staff" element={<Staff />} />
-              <Route path="/our-school/board" element={<Board />} />
-
-              <Route path="/parents" element={<Parents />} />
-              <Route path="/parents/admissions" element={<Admissions />} />
-              <Route path="/parents/calendar" element={<Calendar />} />
-              <Route path="/parents/newsletters" element={<Newsletters />} />
-              <Route path="/parents/uniform" element={<Uniform />} />
-              <Route path="/parents/booklists" element={<Booklists />} />
-              <Route path="/parents/bi-cinealta" element={<BiCinealta />} />
-              <Route path="/parents/funding" element={<Funding />} />
-
-              <Route path="/news" element={<News />} />
-              <Route path="/news/:slug" element={<NewsPost />} />
-
-              <Route path="/activities" element={<Activities />} />
-              <Route path="/activities/:slug" element={<ActivityPage />} />
-
+              {/* After School — always available */}
               <Route path="/after-school" element={<AfterSchool />} />
 
-              <Route path="/policies" element={<Policies />} />
+              {SCHOOL_SITE_ENABLED ? (
+                <>
+                  <Route path="/" element={<Index />} />
 
-              <Route path="/archive" element={<Archive />} />
-              <Route path="/archive/:slug" element={<ArchivePage />} />
+                  <Route path="/our-school" element={<OurSchool />} />
+                  <Route path="/our-school/ethos" element={<Ethos />} />
+                  <Route path="/our-school/history" element={<History />} />
+                  <Route path="/our-school/staff" element={<Staff />} />
+                  <Route path="/our-school/board" element={<Board />} />
 
-              <Route path="/contact" element={<Contact />} />
+                  <Route path="/parents" element={<Parents />} />
+                  <Route path="/parents/admissions" element={<Admissions />} />
+                  <Route path="/parents/calendar" element={<Calendar />} />
+                  <Route path="/parents/newsletters" element={<Newsletters />} />
+                  <Route path="/parents/uniform" element={<Uniform />} />
+                  <Route path="/parents/booklists" element={<Booklists />} />
+                  <Route path="/parents/bi-cinealta" element={<BiCinealta />} />
+                  <Route path="/parents/funding" element={<Funding />} />
+
+                  <Route path="/news" element={<News />} />
+                  <Route path="/news/:slug" element={<NewsPost />} />
+
+                  <Route path="/activities" element={<Activities />} />
+                  <Route path="/activities/:slug" element={<ActivityPage />} />
+
+                  <Route path="/policies" element={<Policies />} />
+
+                  <Route path="/archive" element={<Archive />} />
+                  <Route path="/archive/:slug" element={<ArchivePage />} />
+
+                  <Route path="/contact" element={<Contact />} />
+                </>
+              ) : (
+                /* School site switched off — pages kept, routes redirected */
+                <>
+                  <Route path="/" element={<Navigate to={AFTER_SCHOOL_HOME} replace />} />
+                  <Route path="/our-school/*" element={<Navigate to={AFTER_SCHOOL_HOME} replace />} />
+                  <Route path="/parents/*" element={<Navigate to={AFTER_SCHOOL_HOME} replace />} />
+                  <Route path="/news/*" element={<Navigate to={AFTER_SCHOOL_HOME} replace />} />
+                  <Route path="/activities/*" element={<Navigate to={AFTER_SCHOOL_HOME} replace />} />
+                  <Route path="/archive/*" element={<Navigate to={AFTER_SCHOOL_HOME} replace />} />
+                  <Route path="/policies" element={<Navigate to={AFTER_SCHOOL_HOME} replace />} />
+                  <Route path="/contact" element={<Navigate to={AFTER_SCHOOL_HOME} replace />} />
+                </>
+              )}
+
 
               {/* Admin */}
               <Route path="/admin/login" element={<AdminLogin />} />

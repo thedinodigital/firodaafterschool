@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/utils";
+import { SCHOOL_SITE_ENABLED } from "@/config/site";
 
 interface NavItem {
   name: string;
@@ -11,7 +12,8 @@ interface NavItem {
   children?: { name: string; href: string }[];
 }
 
-const navigation: NavItem[] = [
+const schoolNavigation: NavItem[] = [
+
   {
     name: "Our School",
     href: "/our-school",
@@ -70,6 +72,14 @@ const navigation: NavItem[] = [
   },
   { name: "Contact", href: "/contact" },
 ];
+
+// Firoda After School only — used when the school site is switched off.
+const afterSchoolNavigation: NavItem[] = [
+  { name: "After School", href: "/after-school" },
+];
+
+const navigation: NavItem[] = SCHOOL_SITE_ENABLED ? schoolNavigation : afterSchoolNavigation;
+
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -138,7 +148,12 @@ export function Header() {
 
         <div className="hidden lg:flex items-center">
           <Button asChild variant="accent" size="sm" className="px-5">
-            <Link to="/parents/admissions">Enrol 2026–27</Link>
+            {SCHOOL_SITE_ENABLED ? (
+              <Link to="/parents/admissions">Enrol 2026–27</Link>
+            ) : (
+              <Link to="/after-school#enquire">Enquire about a place</Link>
+            )}
+
           </Button>
         </div>
 
@@ -203,7 +218,12 @@ export function Header() {
             ))}
             <div className="pt-3">
               <Button asChild variant="accent" className="w-full">
-                <Link to="/parents/admissions">Enrol 2026–27</Link>
+                {SCHOOL_SITE_ENABLED ? (
+                  <Link to="/parents/admissions">Enrol 2026–27</Link>
+                ) : (
+                  <Link to="/after-school#enquire">Enquire about a place</Link>
+                )}
+
               </Button>
             </div>
           </div>
