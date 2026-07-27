@@ -53,7 +53,7 @@ export function Footer() {
   return (
     <footer className="bg-footer text-footer-foreground mt-24">
       <div className="container py-16 lg:py-20">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5" + (SCHOOL_SITE_ENABLED ? "" : " lg:grid-cols-3 gap-10 lg:gap-12">
+        <div className={`grid sm:grid-cols-2 gap-10 lg:gap-12 ${SCHOOL_SITE_ENABLED ? "lg:grid-cols-5" : "lg:grid-cols-3"}`}>
           <div className="lg:col-span-1 space-y-5">
             <Link to={HOME_PATH} className="inline-flex flex-col gap-3 group" aria-label="Holy Cross National School, Firoda — Home">
               <img
