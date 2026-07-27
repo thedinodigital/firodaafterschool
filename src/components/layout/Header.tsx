@@ -148,7 +148,12 @@ export function Header() {
 
         <div className="hidden lg:flex items-center">
           <Button asChild variant="accent" size="sm" className="px-5">
-            <Link to="/parents/admissions">Enrol 2026–27</Link>
+            {SCHOOL_SITE_ENABLED ? (
+              <Link to="/parents/admissions">Enrol 2026–27</Link>
+            ) : (
+              <Link to="/after-school#enquire">Enquire about a place</Link>
+            )}
+
           </Button>
         </div>
 
