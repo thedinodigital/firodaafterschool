@@ -229,7 +229,7 @@ const AfterSchool = () => {
                 className="rounded-3xl border border-foreground/10 bg-cream-warm/60 p-7 hover:bg-cream-warm transition-colors"
               >
                 <div className="w-10 h-10 rounded-2xl bg-gold-soft flex items-center justify-center mb-4">
-                  <ShieldCheck className="w-5 h-5 text-forest-deep" aria-hidden="true" />
+                  <ShieldCheck className="w-5 h-5 text-primary" aria-hidden="true" />
                 </div>
                 <h3 className="font-heading text-xl font-medium mb-2">{p.title}</h3>
                 <p className="text-sm text-foreground/70 leading-relaxed">{p.body}</p>
